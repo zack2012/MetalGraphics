@@ -34,10 +34,17 @@ class ViewController: UIViewController {
     }
     
     private func buildModels() {
-        let model = SectionModel(header: "图形学的 Hello World", footer: nil,
+        var model = SectionModel(header: "图形学的 Hello World", footer: nil,
                                  content: ["Draw a Triangle"],
                                  viewControllerClasses: [HelloTriangleViewController.self])
         models.append(model)
+        
+        model.header = "坐标变换"
+        model.content = ["Draw a cube"]
+        model.viewControllerClasses = [CubeViewController.self]
+        
+        models.append(model)
+        
     }
 }
 

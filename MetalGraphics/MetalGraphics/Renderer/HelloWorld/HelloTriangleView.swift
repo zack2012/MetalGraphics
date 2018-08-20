@@ -47,8 +47,8 @@ class HelloTriangleView: UIView {
         metalLayer.contentsScale = UIScreen.main.scale
         
         let library = device.makeDefaultLibrary()
-        let vertexFun = library?.makeFunction(name: "vertex_main")
-        let fragmentFun = library?.makeFunction(name: "fragment_main")
+        let vertexFun = library?.makeFunction(name: "helloTriangleShader")
+        let fragmentFun = library?.makeFunction(name: "helloTriangleFragment")
         
         let pipelineDesc = MTLRenderPipelineDescriptor()
         pipelineDesc.vertexFunction = vertexFun

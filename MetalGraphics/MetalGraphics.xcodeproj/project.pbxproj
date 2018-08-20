@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14648373212AC23D004C76E1 /* CubeViewController.swift */; };
 		900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2A21280C2300554676 /* AppDelegate.swift */; };
 		900B4E2D21280C2300554676 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2C21280C2300554676 /* ViewController.swift */; };
 		900B4E3021280C2300554676 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900B4E2E21280C2300554676 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14648373212AC23D004C76E1 /* CubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
 		900B4E2721280C2300554676 /* MetalGraphics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGraphics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		900B4E2A21280C2300554676 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		900B4E2C21280C2300554676 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14648372212AC223004C76E1 /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				14648373212AC23D004C76E1 /* CubeViewController.swift */,
+			);
+			path = Cube;
+			sourceTree = "<group>";
+		};
 		900B4E1E21280C2300554676 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +98,7 @@
 		900B4E412128159500554676 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				14648372212AC223004C76E1 /* Cube */,
 				900B4E44212815C100554676 /* HelloWorld */,
 			);
 			path = Renderer;
@@ -175,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				900B4E43212815BB00554676 /* HelloTriangleView.swift in Sources */,
+				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
 				900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */,
 				900B4E3F21280E9000554676 /* ChapterCell.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
