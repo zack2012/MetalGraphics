@@ -43,6 +43,7 @@ class CubeView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         metalLayer.pixelFormat = .bgra8Unorm
+        metalLayer.device = MTLCreateSystemDefaultDevice()
     }
     
     required init?(coder aDecoder: NSCoder) {

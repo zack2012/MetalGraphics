@@ -19,6 +19,8 @@
 		900B4E48212817EC00554676 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E47212817EC00554676 /* BaseViewController.swift */; };
 		900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E49212A457500554676 /* HelloTriangleShaders.metal */; };
 		90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFC212B8A0A00471FE1 /* CubeView.swift */; };
+		90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFF212C3C4200471FE1 /* CubeRenderer.swift */; };
+		90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90127F01212C3DFC00471FE1 /* CubeShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		900B4E47212817EC00554676 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		900B4E49212A457500554676 /* HelloTriangleShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = HelloTriangleShaders.metal; sourceTree = "<group>"; };
 		90127EFC212B8A0A00471FE1 /* CubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeView.swift; sourceTree = "<group>"; };
+		90127EFF212C3C4200471FE1 /* CubeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeRenderer.swift; sourceTree = "<group>"; };
+		90127F01212C3DFC00471FE1 /* CubeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CubeShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				14648373212AC23D004C76E1 /* CubeViewController.swift */,
 				90127EFC212B8A0A00471FE1 /* CubeView.swift */,
+				90127EFF212C3C4200471FE1 /* CubeRenderer.swift */,
+				90127F01212C3DFC00471FE1 /* CubeShaders.metal */,
 			);
 			path = Cube;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 				TargetAttributes = {
 					900B4E2621280C2300554676 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -190,9 +197,11 @@
 			files = (
 				900B4E43212815BB00554676 /* HelloTriangleView.swift in Sources */,
 				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
+				90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */,
 				900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */,
 				900B4E3F21280E9000554676 /* ChapterCell.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
+				90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */,
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
@@ -342,9 +351,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -354,8 +366,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = lowe.MetalGraphics;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -363,9 +377,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -377,6 +394,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
