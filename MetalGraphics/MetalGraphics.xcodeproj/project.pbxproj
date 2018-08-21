@@ -18,6 +18,7 @@
 		900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E45212816D100554676 /* HelloTriangleViewController.swift */; };
 		900B4E48212817EC00554676 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E47212817EC00554676 /* BaseViewController.swift */; };
 		900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E49212A457500554676 /* HelloTriangleShaders.metal */; };
+		90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFC212B8A0A00471FE1 /* CubeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		900B4E45212816D100554676 /* HelloTriangleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloTriangleViewController.swift; sourceTree = "<group>"; };
 		900B4E47212817EC00554676 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		900B4E49212A457500554676 /* HelloTriangleShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = HelloTriangleShaders.metal; sourceTree = "<group>"; };
+		90127EFC212B8A0A00471FE1 /* CubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				14648373212AC23D004C76E1 /* CubeViewController.swift */,
+				90127EFC212B8A0A00471FE1 /* CubeView.swift */,
 			);
 			path = Cube;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
+				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
