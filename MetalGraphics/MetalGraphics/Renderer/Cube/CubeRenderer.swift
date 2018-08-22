@@ -81,7 +81,7 @@ class CubeRenderer: CubeViewDelegate {
         encoder.setCullMode(.back)
         
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        encoder.setVertexBuffer(indexBuffer, offset: 0, index: 1)
+        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
         
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: CubeRenderer.indices.count,
@@ -96,7 +96,12 @@ class CubeRenderer: CubeViewDelegate {
     }
     
     private func updateUniformBuffer() {
-        
+        let scale = Math.matrixScale(0.5)
+        let rotate1 = Math.matrixRotation(axis: float3(0, 0, 1), angle: -45.radien)
+        let rotate2 = Math.matrixRotation(axis: float3(0, 1, 0), angle: -35.2644.radien)
+        let mat = rotate2 * rotate1 * scale
+        var uniforms = Uniforms(modelViewProjectionMatrix: mat)
+        self.uniformBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.stride)
     }
 }
 
@@ -124,5 +129,17 @@ extension CubeRenderer {
     
     struct Uniforms {
         var modelViewProjectionMatrix: float4x4
+    }
+}
+
+fileprivate extension Double {
+    var radien: Float {
+        return Float(self) * .pi / 180
+    }
+}
+
+fileprivate extension Int {
+    var radien: Float {
+        return Float(self) * .pi / 180
     }
 }

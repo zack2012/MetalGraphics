@@ -15,9 +15,18 @@ struct Vertex {
     float4 color;
 };
 
+struct Uniforms {
+    float4x4 modelViewProjectionMatrix;
+};
+
 vertex Vertex cubeShader(device Vertex *vertics [[buffer(0)]],
-                          uint vid [[vertex_id]]) {
-    return vertics[vid];
+                         constant Uniforms *uniforms [[buffer(1)]],
+                         uint vid [[vertex_id]]) {
+    Vertex vertexOut;
+    vertexOut.position = uniforms->modelViewProjectionMatrix * vertics[vid].position;
+    vertexOut.color = vertics[vid].color;
+    
+    return vertexOut;
 }
 
 fragment float4 cubeFragment(Vertex vertexIn [[stage_in]]) {

@@ -70,10 +70,9 @@ class CubeView: UIView {
         let width = Int(drawableSize.width)
         let height = Int(drawableSize.height)
         
-        if let depthTexture = self.depthTexture,
-                depthTexture.width != width ||
-                depthTexture.height != height {
-            let desc = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .bgra8Unorm,
+        if self.depthTexture == nil || self.depthTexture!.width != width ||
+            self.depthTexture!.height != height {
+            let desc = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .depth32Float,
                                                                 width: width,
                                                                 height: height,
                                                                 mipmapped: false)
