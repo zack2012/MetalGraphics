@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14648373212AC23D004C76E1 /* CubeViewController.swift */; };
+		14FF5B46212D7EE900210AEC /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Math.swift */; };
 		900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2A21280C2300554676 /* AppDelegate.swift */; };
 		900B4E2D21280C2300554676 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2C21280C2300554676 /* ViewController.swift */; };
 		900B4E3021280C2300554676 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900B4E2E21280C2300554676 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		14648373212AC23D004C76E1 /* CubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
+		14FF5B45212D7EE900210AEC /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		900B4E2721280C2300554676 /* MetalGraphics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGraphics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		900B4E2A21280C2300554676 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		900B4E2C21280C2300554676 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,14 @@
 				90127F01212C3DFC00471FE1 /* CubeShaders.metal */,
 			);
 			path = Cube;
+			sourceTree = "<group>";
+		};
+		14FF5B44212D7EDD00210AEC /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				14FF5B45212D7EE900210AEC /* Math.swift */,
+			);
+			path = Math;
 			sourceTree = "<group>";
 		};
 		900B4E1E21280C2300554676 = {
@@ -107,6 +117,7 @@
 		900B4E412128159500554676 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				14FF5B44212D7EDD00210AEC /* Math */,
 				14648372212AC223004C76E1 /* Cube */,
 				900B4E44212815C100554676 /* HelloWorld */,
 			);
@@ -206,6 +217,7 @@
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
+				14FF5B46212D7EE900210AEC /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +367,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -381,7 +393,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
