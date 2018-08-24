@@ -11,23 +11,28 @@ import simd
 
 class CubeRenderer: CubeViewDelegate {
     
-    var device: MTLDevice
+    private var device: MTLDevice
     
-    var commandQueue: MTLCommandQueue?
+    private var commandQueue: MTLCommandQueue?
     
-    var renderPipelineState: MTLRenderPipelineState?
-    var depthStencilState: MTLDepthStencilState?
+    private var renderPipelineState: MTLRenderPipelineState?
+    private var depthStencilState: MTLDepthStencilState?
     
-    var vertexBuffer: MTLBuffer?
-    var indexBuffer: MTLBuffer?
-    var uniformBuffer: MTLBuffer?
+    private var vertexBuffer: MTLBuffer?
+    private var indexBuffer: MTLBuffer?
+    private var uniformBuffer: MTLBuffer?
     
     var rotationX: Float = 0
     var rotationY: Float = 0
 
+    private var bufferIndex: Int
+    private var semaphore: DispatchSemaphore
+    
     init(device: MTLDevice) {
         self.device = device
         commandQueue = device.makeCommandQueue()
+        bufferIndex = 0
+        semaphore = DispatchSemaphore(value: CubeRenderer.bufferCount)
         makePipeline()
         makeBuffers()
     }
@@ -61,12 +66,15 @@ class CubeRenderer: CubeViewDelegate {
                                         options: .storageModeShared)
         indexBuffer?.label = "Indices"
         
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.stride, options: .storageModeShared)
+        uniformBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.stride * CubeRenderer.bufferCount,
+                                          options: .storageModeShared)
         uniformBuffer?.label = "Uniforms"
     }
     
     func drawInView(_ view: CubeView) {
-        updateUniformBuffer(view: view, duration: Float(view.frameDuration()))
+        semaphore.wait()
+        
+        updateUniformBuffer(view: view)
         
         guard let commandBuffer = commandQueue?.makeCommandBuffer() else {
             return
@@ -84,7 +92,9 @@ class CubeRenderer: CubeViewDelegate {
         encoder.setCullMode(.back)
         
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
+        encoder.setVertexBuffer(uniformBuffer,
+                                offset: bufferIndex * MemoryLayout<Uniforms>.stride,
+                                index: 1)
         
         encoder.drawIndexedPrimitives(type: .triangle,
                                       indexCount: CubeRenderer.indices.count,
@@ -95,10 +105,16 @@ class CubeRenderer: CubeViewDelegate {
         encoder.endEncoding()
         
         commandBuffer.present(drawable!)
+        
+        commandBuffer.addCompletedHandler { (_) in
+            self.bufferIndex = (self.bufferIndex + 1) % CubeRenderer.bufferCount
+            self.semaphore.signal()
+        }
+        
         commandBuffer.commit()
     }
     
-    private func updateUniformBuffer(view: CubeView, duration: Float) {
+    private func updateUniformBuffer(view: CubeView) {
         let scaleFactor: Float = 0.8
         
         let rotate1 = Math.matrixRotation(axis: float3(1, 0, 0), angle: rotationX)
@@ -110,8 +126,11 @@ class CubeRenderer: CubeViewDelegate {
         let projection = Math.matrixPerspective(aspect: apsect, fovy: 72.radian, near: 1, far: 100)
         let mat = projection * translate * rotate2 * rotate1 * scale
         
-        var uniforms = Uniforms(modelViewProjectionMatrix: mat)
-        self.uniformBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.stride)
+        let uniforms = Uniforms(modelViewProjectionMatrix: mat)
+        let uniformRawBuffer = uniformBuffer?.contents()
+        uniformRawBuffer?.storeBytes(of: uniforms,
+                                     toByteOffset: MemoryLayout<Uniforms>.stride * bufferIndex,
+                                     as: Uniforms.self)
     }
 }
 
@@ -140,5 +159,7 @@ extension CubeRenderer {
     struct Uniforms {
         var modelViewProjectionMatrix: float4x4
     }
+    
+    private static let bufferCount = 3
 }
 

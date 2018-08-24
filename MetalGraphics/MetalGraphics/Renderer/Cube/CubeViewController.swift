@@ -24,7 +24,6 @@ class CubeViewController: BaseViewController {
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(gesture(_:)))
         cubeView.addGestureRecognizer(gesture)
-        
     }
 
     @objc func gesture(_ sender: UIPanGestureRecognizer) {
