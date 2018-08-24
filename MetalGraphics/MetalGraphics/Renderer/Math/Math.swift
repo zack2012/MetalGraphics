@@ -57,4 +57,22 @@ public enum Math {
         let ww = float4(x, y, z, 1)
         return float4x4(xx, yy, zz, ww)
     }
+    
+    public static func matrixPerspective(aspect: Float, fovy: Float, near: Float, far: Float) -> float4x4 {
+        let yScale = 1 / tan(fovy * 0.5)
+        
+        // 这里除以apsect是为了保证如果在clip space里的坐标相等，则在屏幕上显示时也应该相等，不受屏幕aspect的影响
+        let xScale = yScale / aspect
+        
+        let zRange = far - near
+        let zScale = -(far + near) / zRange
+        let wz = -2 * far * near / zRange
+        
+        let p = float4(xScale, 0, 0, 0)
+        let q = float4(0, yScale, 0, 0)
+        let r = float4(0, 0, zScale, -1)
+        let s = float4(0, 0, wz, 0)
+        
+        return float4x4(p, q, r, s)
+    }
 }

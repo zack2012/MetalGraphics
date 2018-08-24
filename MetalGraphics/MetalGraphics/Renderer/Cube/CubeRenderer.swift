@@ -22,6 +22,11 @@ class CubeRenderer: CubeViewDelegate {
     var indexBuffer: MTLBuffer?
     var uniformBuffer: MTLBuffer?
     
+    var rotationX: Float = 0
+    var rotationY: Float = 0
+    var time: Float = 0
+    
+    
     init(device: MTLDevice) {
         self.device = device
         commandQueue = device.makeCommandQueue()
@@ -63,7 +68,7 @@ class CubeRenderer: CubeViewDelegate {
     }
     
     func drawInView(_ view: CubeView) {
-        updateUniformBuffer()
+        updateUniformBuffer(view: view, duration: Float(view.frameDuration()))
         
         guard let commandBuffer = commandQueue?.makeCommandBuffer() else {
             return
@@ -95,11 +100,19 @@ class CubeRenderer: CubeViewDelegate {
         commandBuffer.commit()
     }
     
-    private func updateUniformBuffer() {
-        let scale = Math.matrixScale(0.5)
-        let rotate1 = Math.matrixRotation(axis: float3(0, 0, 1), angle: -45.radien)
-        let rotate2 = Math.matrixRotation(axis: float3(0, 1, 0), angle: -35.2644.radien)
-        let mat = rotate2 * rotate1 * scale
+    private func updateUniformBuffer(view: CubeView, duration: Float) {
+        time += duration
+        rotationX += duration * .pi / 2
+        rotationY += duration * .pi / 3
+        let scaleFactor = sin(5 * time) * 0.25 + 1
+        let rotate1 = Math.matrixRotation(axis: float3(1, 0, 0), angle: rotationY)
+        let rotate2 = Math.matrixRotation(axis: float3(0, 1, 0), angle: rotationY)
+        let scale = Math.matrixScale(scaleFactor)
+        let translate = Math.matrixTranslate(x: 0, y: 0, z: -5)
+        let size = view.metalLayer.drawableSize
+        let apsect = Float(size.width / size.height)
+        let projection = Math.matrixPerspective(aspect: apsect, fovy: 72.radien, near: 1, far: 100)
+        let mat = projection * translate * rotate2 * rotate1 * scale
         var uniforms = Uniforms(modelViewProjectionMatrix: mat)
         self.uniformBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.stride)
     }
