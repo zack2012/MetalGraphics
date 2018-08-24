@@ -8,6 +8,7 @@
 
 import simd
 import Darwin
+import QuartzCore
 
 public enum Math {
     public static func matrixRotation(axis: float3, angle: Float) -> float4x4 {
@@ -76,3 +77,22 @@ public enum Math {
         return float4x4(p, q, r, s)
     }
 }
+
+public extension Double {
+    var radian: Float {
+        return Float(self) * .pi / 180
+    }
+}
+
+public extension Int {
+    var radian: Float {
+        return Float(self) * .pi / 180
+    }
+}
+
+public extension CGFloat {
+    var radian: Float {
+        return Float(self) * .pi / 180
+    }
+}
+

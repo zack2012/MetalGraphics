@@ -24,9 +24,7 @@ class CubeRenderer: CubeViewDelegate {
     
     var rotationX: Float = 0
     var rotationY: Float = 0
-    var time: Float = 0
-    
-    
+
     init(device: MTLDevice) {
         self.device = device
         commandQueue = device.makeCommandQueue()
@@ -101,18 +99,17 @@ class CubeRenderer: CubeViewDelegate {
     }
     
     private func updateUniformBuffer(view: CubeView, duration: Float) {
-        time += duration
-        rotationX += duration * .pi / 2
-        rotationY += duration * .pi / 3
-        let scaleFactor = sin(5 * time) * 0.25 + 1
-        let rotate1 = Math.matrixRotation(axis: float3(1, 0, 0), angle: rotationY)
+        let scaleFactor: Float = 0.8
+        
+        let rotate1 = Math.matrixRotation(axis: float3(1, 0, 0), angle: rotationX)
         let rotate2 = Math.matrixRotation(axis: float3(0, 1, 0), angle: rotationY)
         let scale = Math.matrixScale(scaleFactor)
         let translate = Math.matrixTranslate(x: 0, y: 0, z: -5)
         let size = view.metalLayer.drawableSize
         let apsect = Float(size.width / size.height)
-        let projection = Math.matrixPerspective(aspect: apsect, fovy: 72.radien, near: 1, far: 100)
+        let projection = Math.matrixPerspective(aspect: apsect, fovy: 72.radian, near: 1, far: 100)
         let mat = projection * translate * rotate2 * rotate1 * scale
+        
         var uniforms = Uniforms(modelViewProjectionMatrix: mat)
         self.uniformBuffer?.contents().copyMemory(from: &uniforms, byteCount: MemoryLayout<Uniforms>.stride)
     }
@@ -145,14 +142,3 @@ extension CubeRenderer {
     }
 }
 
-fileprivate extension Double {
-    var radien: Float {
-        return Float(self) * .pi / 180
-    }
-}
-
-fileprivate extension Int {
-    var radien: Float {
-        return Float(self) * .pi / 180
-    }
-}
