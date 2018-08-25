@@ -35,6 +35,16 @@ class HelloTriangleView: UIView {
     private var commandQueue: MTLCommandQueue!
     private var displayLink: CADisplayLink?
     
+    private let vertices: [Vertex] = [
+        Vertex(position: float4(0, 250, 0, 1), color: float4(1, 0, 0, 1)),
+        Vertex(position: float4(-250, -250, 0, 1), color: float4(0, 1, 0, 1)),
+        Vertex(position: float4(250, -250, 0, 1), color: float4(0, 0, 1, 1)),
+    ]
+    
+    private var vertexBuffer: MTLBuffer?
+    
+    private var sizeBuffer: MTLBuffer?
+    
     override init(frame: CGRect) {
         self.device = MTLCreateSystemDefaultDevice()!
         
@@ -45,6 +55,24 @@ class HelloTriangleView: UIView {
         
         // 这里需要手动设置contentsScale, 否则为1
         metalLayer.contentsScale = UIScreen.main.scale
+    
+        vertexBuffer = device.makeBuffer(bytes: vertices,
+                                         length: MemoryLayout<Vertex>.stride * vertices.count,
+                                         options: .storageModeShared)
+    
+        let scale = UIScreen.main.scale
+        let drawableSize = bounds.size.applying(CGAffineTransform(scaleX: scale, y: scale))
+        metalLayer.drawableSize = drawableSize
+        
+        var mat = float4x4(diagonal: float4(Float(2 / drawableSize.width),
+                                            Float(2 / drawableSize.height),
+                                            1, 1))
+        let length = MemoryLayout.stride(ofValue: mat)
+        withUnsafeBytes(of: &mat) {
+            self.sizeBuffer = device.makeBuffer(bytes: $0.baseAddress!,
+                                                length: length,
+                                                options: .storageModeShared)
+        }
         
         let library = device.makeDefaultLibrary()
         let vertexFun = library?.makeFunction(name: "helloTriangleShader")
@@ -99,15 +127,8 @@ class HelloTriangleView: UIView {
         
         encoder?.setRenderPipelineState(pipelineState)
         
-        let verties: [Vertex] = [
-            Vertex(position: float4(0, 0.5, 0, 1), color: float4(1, 0, 0, 1)),
-            Vertex(position: float4(-0.5, -0.5, 0, 1), color: float4(0, 1, 0, 1)),
-            Vertex(position: float4(0.5, -0.5, 0, 1), color: float4(0, 0, 1, 1)),
-        ]
-        
-        let buffer = device.makeBuffer(bytes: verties, length: MemoryLayout<Vertex>.stride * verties.count, options: .storageModeShared)
-        
-        encoder?.setVertexBuffer(buffer, offset: 0, index: 0)
+        encoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        encoder?.setVertexBuffer(sizeBuffer, offset: 0, index: 1)
         
         encoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
         encoder?.endEncoding()
