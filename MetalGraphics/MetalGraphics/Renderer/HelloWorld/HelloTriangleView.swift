@@ -10,15 +10,11 @@ import UIKit
 import simd
 
 struct Vertex {
+    /// 顶点位置，单位像素
     var position: float4
-    var color: float4
     
-    func buffer() -> [Float] {
-        var buf = [Float]()
-        buf.append(contentsOf: position.compactMap { $0 })
-        buf.append(contentsOf: color.compactMap { $0 })
-        return buf
-    }
+    /// 顶点颜色，RGBA
+    var color: float4
 }
 
 class HelloTriangleView: UIView {
@@ -33,20 +29,31 @@ class HelloTriangleView: UIView {
     private var device: MTLDevice
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
-    private var displayLink: CADisplayLink?
     
-    private let vertices: [Vertex] = [
-        Vertex(position: float4(0, 250, 0, 1), color: float4(1, 0, 0, 1)),
-        Vertex(position: float4(-250, -250, 0, 1), color: float4(0, 1, 0, 1)),
-        Vertex(position: float4(250, -250, 0, 1), color: float4(0, 0, 1, 1)),
-    ]
+    private let vertices: [Vertex]
     
+    /// 存储顶点数据的buffer
     private var vertexBuffer: MTLBuffer?
     
-    private var sizeBuffer: MTLBuffer?
+    /// 存储坐标变换矩阵的buffer
+    private var matrixBuffer: MTLBuffer?
     
     override init(frame: CGRect) {
         self.device = MTLCreateSystemDefaultDevice()!
+        
+        let scale = UIScreen.main.scale
+        // Metal不用point，而使用pixel，所以这里需要将point转换为pixel
+        let drawableSize = frame.size.applying(CGAffineTransform(scaleX: scale, y: scale))
+        
+        // 设置顶点数据，三角形的中心在屏幕的原点
+        let midX = Float(drawableSize.width / 2)
+//        let midY = Float(drawableSize.height / 2)
+        let midY = Float(200)
+        vertices = [
+            Vertex(position: float4(midX, midY + 250, 0, 1), color: float4(1, 0, 0, 1)),
+            Vertex(position: float4(midX - 250, midY - 250, 0, 1), color: float4(0, 1, 0, 1)),
+            Vertex(position: float4(midX + 250, midY - 250, 0, 1), color: float4(0, 0, 1, 1)),
+        ]
         
         super.init(frame: frame)
         
@@ -55,41 +62,47 @@ class HelloTriangleView: UIView {
         
         // 这里需要手动设置contentsScale, 否则为1
         metalLayer.contentsScale = UIScreen.main.scale
-    
+        metalLayer.drawableSize = drawableSize
+
         vertexBuffer = device.makeBuffer(bytes: vertices,
                                          length: MemoryLayout<Vertex>.stride * vertices.count,
                                          options: .storageModeShared)
     
-        let scale = UIScreen.main.scale
-        let drawableSize = bounds.size.applying(CGAffineTransform(scaleX: scale, y: scale))
-        metalLayer.drawableSize = drawableSize
         
+        // 设置从屏幕空间变化到裁剪空间的变换矩阵
         var mat = float4x4(diagonal: float4(Float(2 / drawableSize.width),
-                                            Float(2 / drawableSize.height),
+                                            -Float(2 / drawableSize.height),
                                             1, 1))
+        mat.columns.3.x = -1
+        mat.columns.3.y = 1
         let length = MemoryLayout.stride(ofValue: mat)
-        withUnsafeBytes(of: &mat) {
-            self.sizeBuffer = device.makeBuffer(bytes: $0.baseAddress!,
+        withUnsafePointer(to: &mat) {
+            self.matrixBuffer = device.makeBuffer(bytes: $0,
                                                 length: length,
                                                 options: .storageModeShared)
         }
         
+        // 获取vertex shader和fragment shader，用于设置render pipeline
         let library = device.makeDefaultLibrary()
         let vertexFun = library?.makeFunction(name: "helloTriangleShader")
         let fragmentFun = library?.makeFunction(name: "helloTriangleFragment")
         
+        // 创建render pipeline
         let pipelineDesc = MTLRenderPipelineDescriptor()
         pipelineDesc.vertexFunction = vertexFun
         pipelineDesc.fragmentFunction = fragmentFun
         pipelineDesc.colorAttachments[0].pixelFormat = metalLayer.pixelFormat
-        
         pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineDesc)
+        
+        // 创建commandQueue
         commandQueue = device.makeCommandQueue()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private var displayLink: CADisplayLink?
     
     override func didMoveToWindow() {
         super.didMoveToWindow()
@@ -124,11 +137,12 @@ class HelloTriangleView: UIView {
         }
         
         let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDesc)
+        encoder?.setViewport(MTLViewport(originX: 0, originY: 300, width: Double(metalLayer.drawableSize.width), height: Double(metalLayer.drawableSize.height), znear: 0, zfar: 1))
         
         encoder?.setRenderPipelineState(pipelineState)
         
         encoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        encoder?.setVertexBuffer(sizeBuffer, offset: 0, index: 1)
+        encoder?.setVertexBuffer(matrixBuffer, offset: 0, index: 1)
         
         encoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
         encoder?.endEncoding()
