@@ -47,8 +47,7 @@ class HelloTriangleView: UIView {
         
         // 设置顶点数据，三角形的中心在屏幕的原点
         let midX = Float(drawableSize.width / 2)
-//        let midY = Float(drawableSize.height / 2)
-        let midY = Float(200)
+        let midY = Float(drawableSize.height / 2)
         vertices = [
             Vertex(position: float4(midX, midY + 250, 0, 1), color: float4(1, 0, 0, 1)),
             Vertex(position: float4(midX - 250, midY - 250, 0, 1), color: float4(0, 1, 0, 1)),
@@ -71,15 +70,15 @@ class HelloTriangleView: UIView {
         
         // 设置从屏幕空间变化到裁剪空间的变换矩阵
         var mat = float4x4(diagonal: float4(Float(2 / drawableSize.width),
-                                            -Float(2 / drawableSize.height),
+                                            Float(2 / drawableSize.height),
                                             1, 1))
         mat.columns.3.x = -1
-        mat.columns.3.y = 1
+        mat.columns.3.y = -1
         let length = MemoryLayout.stride(ofValue: mat)
         withUnsafePointer(to: &mat) {
             self.matrixBuffer = device.makeBuffer(bytes: $0,
-                                                length: length,
-                                                options: .storageModeShared)
+                                                  length: length,
+                                                  options: .storageModeShared)
         }
         
         // 获取vertex shader和fragment shader，用于设置render pipeline
@@ -121,12 +120,14 @@ class HelloTriangleView: UIView {
     }
     
     func redraw() {
+        // 获取下一个空闲的texture，当作渲染目标
         guard let drawable = metalLayer.nextDrawable() else {
             return
         }
         
         let texture = drawable.texture
         
+        // 设置render pass
         let passDesc = MTLRenderPassDescriptor()
         passDesc.colorAttachments[0].texture = texture
         passDesc.colorAttachments[0].loadAction = .clear
@@ -137,17 +138,21 @@ class HelloTriangleView: UIView {
         }
         
         let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDesc)
-        encoder?.setViewport(MTLViewport(originX: 0, originY: 300, width: Double(metalLayer.drawableSize.width), height: Double(metalLayer.drawableSize.height), znear: 0, zfar: 1))
         
         encoder?.setRenderPipelineState(pipelineState)
         
+        // 给shader vertex传入参数
         encoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         encoder?.setVertexBuffer(matrixBuffer, offset: 0, index: 1)
         
+        // 调用draw call，绘制三角形
         encoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
         encoder?.endEncoding()
         
+        // 尽可能早的展示绘制内容
         commandBuffer.present(drawable)
+        
+        // 提交commandBuffer，commandBuffer提交后就不能继续使用了
         commandBuffer.commit()
     }
 }
