@@ -135,6 +135,7 @@ class CubeRenderer: CubeViewDelegate {
 }
 
 extension CubeRenderer {
+    // 顶点数据
     private static let vertices = [
         Vertex(position: float4(-1,  1,  1, 1), color: float4(0, 1, 1, 1)),
         Vertex(position: float4(-1, -1,  1, 1), color: float4(0, 0, 1, 1)),
@@ -147,6 +148,7 @@ extension CubeRenderer {
         Vertex(position: float4( 1,  1, -1, 1), color: float4(1, 1, 0, 1)),
     ]
     
+    // 顶点数据索引
     private static let indices: [UInt16] = [
         3, 2, 6, 6, 7, 3,
         4, 5, 1, 1, 0, 4,
