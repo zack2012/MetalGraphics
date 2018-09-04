@@ -42,9 +42,12 @@ class ViewController: UIViewController {
         model.header = "坐标变换"
         model.content = ["Draw a cube"]
         model.viewControllerClasses = [CubeViewController.self]
-        
         models.append(model)
         
+        model.header = "光照"
+        model.content = ["Blinn-Phong Lighting Model"]
+        model.viewControllerClasses = [LightingViewController.self]
+        models.append(model)
     }
 }
 

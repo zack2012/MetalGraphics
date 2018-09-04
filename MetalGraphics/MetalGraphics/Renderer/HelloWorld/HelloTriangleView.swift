@@ -9,14 +9,6 @@
 import UIKit
 import simd
 
-struct Vertex {
-    /// 顶点位置，单位像素
-    var position: float4
-    
-    /// 顶点颜色，RGBA
-    var color: float4
-}
-
 class HelloTriangleView: UIView {
     private var metalLayer: CAMetalLayer {
         return layer as! CAMetalLayer
