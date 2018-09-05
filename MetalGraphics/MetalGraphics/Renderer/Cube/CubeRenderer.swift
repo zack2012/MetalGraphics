@@ -57,16 +57,16 @@ class CubeRenderer: CubeViewDelegate {
     
     func makeBuffers() {
         vertexBuffer = device.makeBuffer(bytes: CubeRenderer.vertices,
-                                         length: CubeRenderer.vertices.count * MemoryLayout<Vertex>.stride,
+                                         length: CubeRenderer.vertices.memoryStride,
                                          options: .storageModeShared)
         vertexBuffer?.label = "Vertices"
         
         indexBuffer = device.makeBuffer(bytes: CubeRenderer.indices,
-                                        length: CubeRenderer.indices.count * MemoryLayout<Float>.stride,
+                                        length: CubeRenderer.indices.memoryStride,
                                         options: .storageModeShared)
         indexBuffer?.label = "Indices"
         
-        uniformBuffer = device.makeBuffer(length: MemoryLayout<Uniforms>.stride * CubeRenderer.bufferCount,
+        uniformBuffer = device.makeBuffer(length: Uniforms.memoryStride * CubeRenderer.bufferCount,
                                           options: .storageModeShared)
         uniformBuffer?.label = "Uniforms"
     }
@@ -93,7 +93,7 @@ class CubeRenderer: CubeViewDelegate {
         
         encoder.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
         encoder.setVertexBuffer(uniformBuffer,
-                                offset: bufferIndex * MemoryLayout<Uniforms>.stride,
+                                offset: bufferIndex * Uniforms.memoryStride,
                                 index: 1)
         
         encoder.drawIndexedPrimitives(type: .triangle,
@@ -129,7 +129,7 @@ class CubeRenderer: CubeViewDelegate {
         let uniforms = Uniforms(modelViewProjectionMatrix: mat)
         let uniformRawBuffer = uniformBuffer?.contents()
         uniformRawBuffer?.storeBytes(of: uniforms,
-                                     toByteOffset: MemoryLayout<Uniforms>.stride * bufferIndex,
+                                     toByteOffset: Uniforms.memoryStride * bufferIndex,
                                      as: Uniforms.self)
     }
 }
@@ -157,10 +157,6 @@ extension CubeRenderer {
         0, 1, 2, 2, 3, 0,
         7, 6, 5, 5, 4, 7
     ]
-    
-    struct Uniforms {
-        var modelViewProjectionMatrix: float4x4
-    }
     
     private static let bufferCount = 3
 }

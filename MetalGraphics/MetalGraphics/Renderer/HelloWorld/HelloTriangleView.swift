@@ -56,7 +56,7 @@ class HelloTriangleView: UIView {
         metalLayer.drawableSize = drawableSize
 
         vertexBuffer = device.makeBuffer(bytes: vertices,
-                                         length: MemoryLayout<Vertex>.stride * vertices.count,
+                                         length: vertices.memoryStride,
                                          options: .storageModeShared)
     
         

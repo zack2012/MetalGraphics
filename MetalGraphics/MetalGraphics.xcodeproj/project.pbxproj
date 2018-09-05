@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14648373212AC23D004C76E1 /* CubeViewController.swift */; };
 		14FF5B46212D7EE900210AEC /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Math.swift */; };
-		9003A0DD213CBEA3008A530F /* LightingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DC213CBEA3008A530F /* LightingViewController.swift */; };
-		9003A0DF213DF78D008A530F /* LightingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DE213DF78D008A530F /* LightingRenderer.swift */; };
+		9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */; };
+		9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */; };
 		9003A0E1213DFA82008A530F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0E0213DFA82008A530F /* Common.swift */; };
-		9003A0E3213E0580008A530F /* LightingShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0E2213E0580008A530F /* LightingShaders.metal */; };
 		900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2A21280C2300554676 /* AppDelegate.swift */; };
 		900B4E2D21280C2300554676 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B4E2C21280C2300554676 /* ViewController.swift */; };
 		900B4E3021280C2300554676 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900B4E2E21280C2300554676 /* Main.storyboard */; };
@@ -26,15 +25,15 @@
 		90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFC212B8A0A00471FE1 /* CubeView.swift */; };
 		90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFF212C3C4200471FE1 /* CubeRenderer.swift */; };
 		90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90127F01212C3DFC00471FE1 /* CubeShaders.metal */; };
+		906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 906A3F9B213F618500034EAA /* TetrahedronShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		14648373212AC23D004C76E1 /* CubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
 		14FF5B45212D7EE900210AEC /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
-		9003A0DC213CBEA3008A530F /* LightingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingViewController.swift; sourceTree = "<group>"; };
-		9003A0DE213DF78D008A530F /* LightingRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderer.swift; sourceTree = "<group>"; };
+		9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronViewController.swift; sourceTree = "<group>"; };
+		9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronRenderer.swift; sourceTree = "<group>"; };
 		9003A0E0213DFA82008A530F /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
-		9003A0E2213E0580008A530F /* LightingShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LightingShaders.metal; sourceTree = "<group>"; };
 		900B4E2721280C2300554676 /* MetalGraphics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalGraphics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		900B4E2A21280C2300554676 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		900B4E2C21280C2300554676 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		90127EFC212B8A0A00471FE1 /* CubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeView.swift; sourceTree = "<group>"; };
 		90127EFF212C3C4200471FE1 /* CubeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeRenderer.swift; sourceTree = "<group>"; };
 		90127F01212C3DFC00471FE1 /* CubeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CubeShaders.metal; sourceTree = "<group>"; };
+		906A3F9B213F618500034EAA /* TetrahedronShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TetrahedronShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,14 +82,14 @@
 			path = Math;
 			sourceTree = "<group>";
 		};
-		9003A0DB213CBE62008A530F /* Lighting */ = {
+		9003A0DB213CBE62008A530F /* Tetrahedron */ = {
 			isa = PBXGroup;
 			children = (
-				9003A0DC213CBEA3008A530F /* LightingViewController.swift */,
-				9003A0DE213DF78D008A530F /* LightingRenderer.swift */,
-				9003A0E2213E0580008A530F /* LightingShaders.metal */,
+				9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */,
+				9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */,
+				906A3F9B213F618500034EAA /* TetrahedronShaders.metal */,
 			);
-			path = Lighting;
+			path = Tetrahedron;
 			sourceTree = "<group>";
 		};
 		900B4E1E21280C2300554676 = {
@@ -139,7 +139,7 @@
 				14FF5B44212D7EDD00210AEC /* Math */,
 				900B4E44212815C100554676 /* HelloWorld */,
 				14648372212AC223004C76E1 /* Cube */,
-				9003A0DB213CBE62008A530F /* Lighting */,
+				9003A0DB213CBE62008A530F /* Tetrahedron */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -229,6 +229,7 @@
 				900B4E43212815BB00554676 /* HelloTriangleView.swift in Sources */,
 				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
 				90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */,
+				906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */,
 				900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */,
 				900B4E3F21280E9000554676 /* ChapterCell.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
@@ -236,12 +237,11 @@
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
-				9003A0DF213DF78D008A530F /* LightingRenderer.swift in Sources */,
+				9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
 				14FF5B46212D7EE900210AEC /* Math.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
-				9003A0DD213CBEA3008A530F /* LightingViewController.swift in Sources */,
-				9003A0E3213E0580008A530F /* LightingShaders.metal in Sources */,
+				9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
