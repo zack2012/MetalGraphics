@@ -40,8 +40,8 @@ class ViewController: UIViewController {
         models.append(model)
         
         model.header = "坐标变换"
-        model.content = ["Draw a cube", "Draw a Tetrahedron"]
-        model.viewControllerClasses = [CubeViewController.self, TetrahedronViewController.self]
+        model.content = ["Draw a Cube", "Draw a Tetrahedron", "Draw a Sphere"]
+        model.viewControllerClasses = [CubeViewController.self, TetrahedronViewController.self, SphereViewController.self]
         models.append(model)
         
         model.header = "光照"

@@ -9,7 +9,7 @@
 import Metal
 import MetalKit
 
-class TetrahedronRenderer: NSObject {
+class TetrahedronRenderer: NSObject, Renderer {
     var rotationX: Float = 0
     var rotationY: Float = 0
     
@@ -55,9 +55,9 @@ class TetrahedronRenderer: NSObject {
     private var verticsBuffer: MTLBuffer?
     private var lineIndexBuffer: MTLBuffer?
     private var triangleIndexBuffer: MTLBuffer?
-    private var uniformBuffer: MTLBuffer?
-
-    init(mtkView: MTKView) {
+    var uniformBuffer: MTLBuffer?
+    
+    required init(mtkView: MTKView) {
         self.device = mtkView.device!
         self.commandQueue = self.device.makeCommandQueue()!
         
@@ -82,28 +82,7 @@ class TetrahedronRenderer: NSObject {
         triangleIndexBuffer = device.makeBuffer(bytes: triangleIndices, length: triangleIndices.memoryStride, options: .storageModeShared)
         uniformBuffer = device.makeBuffer(length: Uniforms.memoryStride, options: .storageModeShared)
     }
-    
-    private func updateUniformBuffer(view: MTKView) {
-        let scaleFactor: Float = 0.8
         
-        let rotate1 = Math.matrixRotation(axis: float3(1, 0, 0), angle: rotationX)
-        let rotate2 = Math.matrixRotation(axis: float3(0, 1, 0), angle: rotationY)
-        let scale = Math.matrixScale(scaleFactor)
-        let translate = Math.matrixTranslate(x: 0, y: 0, z: -5)
-        let size = view.drawableSize
-        let apsect = Float(size.width / size.height)
-        let projection = Math.matrixPerspective(aspect: apsect, fovy: 72.radian, near: 1, far: 100)
-        let mat = projection * translate * rotate2 * rotate1 * scale
-        
-        let uniforms = Uniforms(modelViewProjectionMatrix: mat)
-        let uniformRawBuffer = uniformBuffer?.contents()
-        uniformRawBuffer?.storeBytes(of: uniforms,
-                                     toByteOffset: 0,
-                                     as: Uniforms.self)
-    }
-}
-
-extension TetrahedronRenderer: MTKViewDelegate {
     func draw(in view: MTKView) {
         updateUniformBuffer(view: view)
         
@@ -144,7 +123,6 @@ extension TetrahedronRenderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
-    }
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
+
 }

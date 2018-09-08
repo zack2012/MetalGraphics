@@ -26,6 +26,15 @@
 		90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFF212C3C4200471FE1 /* CubeRenderer.swift */; };
 		90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90127F01212C3DFC00471FE1 /* CubeShaders.metal */; };
 		906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 906A3F9B213F618500034EAA /* TetrahedronShaders.metal */; };
+		9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561B2141FE8800E370D6 /* MetalViewController.swift */; };
+		9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561D2141FF2800E370D6 /* SphereViewController.swift */; };
+		908156202141FF7500E370D6 /* SphereRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561F2141FF7500E370D6 /* SphereRenderer.swift */; };
+		908156222141FF9000E370D6 /* SphereShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 908156212141FF9000E370D6 /* SphereShaders.metal */; };
+		90815624214204CE00E370D6 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90815623214204CE00E370D6 /* Renderer.swift */; };
+		909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2521438448000AA691 /* AlertAnimator.swift */; };
+		909A7A2821438448000AA691 /* AlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2621438448000AA691 /* AlertTransitioningDelegate.swift */; };
+		909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A292143844D000AA691 /* TransitionAnimatorable.swift */; };
+		909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2B21438513000AA691 /* SphereParameterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +59,15 @@
 		90127EFF212C3C4200471FE1 /* CubeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeRenderer.swift; sourceTree = "<group>"; };
 		90127F01212C3DFC00471FE1 /* CubeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CubeShaders.metal; sourceTree = "<group>"; };
 		906A3F9B213F618500034EAA /* TetrahedronShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TetrahedronShaders.metal; sourceTree = "<group>"; };
+		9081561B2141FE8800E370D6 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		9081561D2141FF2800E370D6 /* SphereViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereViewController.swift; sourceTree = "<group>"; };
+		9081561F2141FF7500E370D6 /* SphereRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereRenderer.swift; sourceTree = "<group>"; };
+		908156212141FF9000E370D6 /* SphereShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = SphereShaders.metal; sourceTree = "<group>"; };
+		90815623214204CE00E370D6 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		909A7A2521438448000AA691 /* AlertAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAnimator.swift; sourceTree = "<group>"; };
+		909A7A2621438448000AA691 /* AlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTransitioningDelegate.swift; sourceTree = "<group>"; };
+		909A7A292143844D000AA691 /* TransitionAnimatorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimatorable.swift; sourceTree = "<group>"; };
+		909A7A2B21438513000AA691 /* SphereParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereParameterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +146,10 @@
 				900B4E2C21280C2300554676 /* ViewController.swift */,
 				900B4E3E21280E9000554676 /* ChapterCell.swift */,
 				900B4E47212817EC00554676 /* BaseViewController.swift */,
+				9081561B2141FE8800E370D6 /* MetalViewController.swift */,
+				909A7A2521438448000AA691 /* AlertAnimator.swift */,
+				909A7A2621438448000AA691 /* AlertTransitioningDelegate.swift */,
+				909A7A292143844D000AA691 /* TransitionAnimatorable.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -136,10 +158,12 @@
 			isa = PBXGroup;
 			children = (
 				9003A0E0213DFA82008A530F /* Common.swift */,
+				90815623214204CE00E370D6 /* Renderer.swift */,
 				14FF5B44212D7EDD00210AEC /* Math */,
 				900B4E44212815C100554676 /* HelloWorld */,
 				14648372212AC223004C76E1 /* Cube */,
 				9003A0DB213CBE62008A530F /* Tetrahedron */,
+				9081561A2141FE5B00E370D6 /* Sphere */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -152,6 +176,17 @@
 				900B4E49212A457500554676 /* HelloTriangleShaders.metal */,
 			);
 			path = HelloWorld;
+			sourceTree = "<group>";
+		};
+		9081561A2141FE5B00E370D6 /* Sphere */ = {
+			isa = PBXGroup;
+			children = (
+				9081561D2141FF2800E370D6 /* SphereViewController.swift */,
+				909A7A2B21438513000AA691 /* SphereParameterViewController.swift */,
+				9081561F2141FF7500E370D6 /* SphereRenderer.swift */,
+				908156212141FF9000E370D6 /* SphereShaders.metal */,
+			);
+			path = Sphere;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,20 +262,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				900B4E43212815BB00554676 /* HelloTriangleView.swift in Sources */,
+				908156202141FF7500E370D6 /* SphereRenderer.swift in Sources */,
 				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
 				90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */,
 				906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */,
+				908156222141FF9000E370D6 /* SphereShaders.metal in Sources */,
 				900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */,
 				900B4E3F21280E9000554676 /* ChapterCell.swift in Sources */,
+				909A7A2821438448000AA691 /* AlertTransitioningDelegate.swift in Sources */,
+				909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
+				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
 				90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */,
+				909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */,
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
 				9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
+				90815624214204CE00E370D6 /* Renderer.swift in Sources */,
 				14FF5B46212D7EE900210AEC /* Math.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
+				909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */,
+				9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */,
 				9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

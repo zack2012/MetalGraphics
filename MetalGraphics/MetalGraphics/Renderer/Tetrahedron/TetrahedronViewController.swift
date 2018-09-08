@@ -10,22 +10,9 @@ import UIKit
 import MetalKit
 import Metal
 
-class TetrahedronViewController: BaseViewController {
-    var mtkView: MTKView!
-    var device: MTLDevice!
-    var renderer: TetrahedronRenderer!
-    
-    override func loadView() {
-        device = MTLCreateSystemDefaultDevice()
-        mtkView = MTKView(frame: UIScreen.main.bounds, device: device)
-        self.view = mtkView
-    }
-    
+class TetrahedronViewController: MetalViewController {
     override func viewDidLoad() {
-        self.renderer = TetrahedronRenderer(mtkView: mtkView)
-
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(gesture(_:)))
-        view.addGestureRecognizer(gesture)
+       super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "line",
                                                             style: .plain, target: self,
@@ -33,21 +20,15 @@ class TetrahedronViewController: BaseViewController {
         
     }
     
-    @objc func gesture(_ sender: UIPanGestureRecognizer) {
-        guard let renderer = self.renderer else {
+    @objc func rightBarItemTapped(_ sender: UIBarButtonItem) {
+        guard let renderer = self.renderer as? TetrahedronRenderer else {
             return
         }
-        
-        let point = sender.translation(in: view)
-        let deltaX = renderer.rotationX + Float(point.x.radian)
-        let deltaY = renderer.rotationY + Float(point.y.radian)
-        renderer.rotationX = deltaX
-        renderer.rotationY = deltaY
-        sender.setTranslation(.zero, in: self.view)
-    }
-    
-    @objc func rightBarItemTapped(_ sender: UIBarButtonItem) {
         renderer.isDrawLine.toggle()
         sender.title = renderer.isDrawLine ? "line" : "fill"
+    }
+    
+    override var renderClass: Renderer.Type {
+        return TetrahedronRenderer.self
     }
 }

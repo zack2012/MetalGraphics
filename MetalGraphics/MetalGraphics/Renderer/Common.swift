@@ -8,6 +8,7 @@
 
 import Foundation
 import simd
+import MetalKit
 
 protocol QueryMemoryLayout {
     static var memoryStride: Int { get }
@@ -28,12 +29,18 @@ extension Collection where Element: QueryMemoryLayout {
 extension Float: QueryMemoryLayout {}
 extension UInt16: QueryMemoryLayout {}
 
-struct Vertex: QueryMemoryLayout {
+struct Vertex: QueryMemoryLayout, CustomStringConvertible {
     /// 顶点位置，单位像素
     var position: float4
     
     /// 顶点颜色，RGBA
     var color: float4
+    
+    var description: String {
+        var str = ""
+        print("position: \(position), color: \(color)", to: &str)
+        return str
+    }
 }
 
 struct Uniforms: QueryMemoryLayout {
