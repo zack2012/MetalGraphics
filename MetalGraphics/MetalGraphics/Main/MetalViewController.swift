@@ -9,6 +9,7 @@
 import UIKit
 import Metal
 import MetalKit
+import GSMath
 
 class MetalViewController: BaseViewController {
     var mtkView: MTKView!

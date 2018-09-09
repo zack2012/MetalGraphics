@@ -1,21 +1,21 @@
 //
-//  SphereRenderer.swift
+//  LightingRenderer.swift
 //  MetalGraphics
 //
-//  Created by lowe on 2018/9/7.
+//  Created by lowe on 2018/9/8.
 //  Copyright © 2018 lowe. All rights reserved.
 //
 
 import Metal
 import MetalKit
-import simd
 
-class SphereRenderer: NSObject, Renderer {
+
+class LightingRenderer: NSObject, Renderer {
     var rotationX: Float = 0
     var rotationY: Float = 0
     
     var primitiveType: MTLPrimitiveType = .lineStrip
-    var iteration = 5
+    var iteration = 6
     
     var scaleFactor: Float {
         return 1.5
@@ -38,8 +38,8 @@ class SphereRenderer: NSObject, Renderer {
         renderPipelineDesc.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat
         
         let library = device.makeDefaultLibrary()!
-        let vertexFunc = library.makeFunction(name: "sphereShader")
-        let fragmentFunc = library.makeFunction(name: "sphereFragment")
+        let vertexFunc = library.makeFunction(name: "lightingShader")
+        let fragmentFunc = library.makeFunction(name: "lightingFragment")
         
         renderPipelineDesc.vertexFunction = vertexFunc
         renderPipelineDesc.fragmentFunction = fragmentFunc
@@ -54,13 +54,13 @@ class SphereRenderer: NSObject, Renderer {
     
     func makeBuffer(n: Int) {
         self.vertics.removeAll(keepingCapacity: true)
-
+        
         let vertics = [
             Vertex(position: float4(0, 0, 1, 1), color: float4(1, 0, 0, 1)),
             Vertex(position: float4(0, 2 * sqrt(2) / 3, -1 / 3, 1), color: float4(0, 1, 0, 1)),
             Vertex(position: float4(-sqrt(6) / 3, -sqrt(2) / 3, -1 / 3, 1), color: float4(0, 0, 1, 1)),
             Vertex(position: float4(sqrt(6) / 3, -sqrt(2) / 3, -1 / 3, 1), color: float4(1, 1, 0, 1)),
-        ]
+            ]
         
         func makeBufferImpl(a: Vertex, b: Vertex, c: Vertex, n: Int) {
             if n > 0 {
@@ -72,7 +72,7 @@ class SphereRenderer: NSObject, Renderer {
                 makeBufferImpl(a: b, b: v2, c: v1, n: n - 1)
                 makeBufferImpl(a: c, b: v3, c: v2, n: n - 1)
                 makeBufferImpl(a: v1, b: v2, c: v3, n: n - 1)
-
+                
                 return
             }
             
@@ -125,3 +125,4 @@ class SphereRenderer: NSObject, Renderer {
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
 }
+

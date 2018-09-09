@@ -39,14 +39,14 @@ class ViewController: UIViewController {
                                  viewControllerClasses: [HelloTriangleViewController.self])
         models.append(model)
         
-        model.header = "坐标变换"
+        model.header = "基本图形绘制"
         model.content = ["Draw a Cube", "Draw a Tetrahedron", "Draw a Sphere"]
         model.viewControllerClasses = [CubeViewController.self, TetrahedronViewController.self, SphereViewController.self]
         models.append(model)
         
         model.header = "光照"
         model.content = ["Blinn-Phong Lighting Model"]
-        model.viewControllerClasses = [BaseViewController.self]
+        model.viewControllerClasses = [LightingViewController.self]
         models.append(model)
     }
 }

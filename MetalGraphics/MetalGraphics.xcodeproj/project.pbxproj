@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14648373212AC23D004C76E1 /* CubeViewController.swift */; };
-		14FF5B46212D7EE900210AEC /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Math.swift */; };
 		9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */; };
 		9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */; };
 		9003A0E1213DFA82008A530F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0E0213DFA82008A530F /* Common.swift */; };
@@ -35,11 +34,52 @@
 		909A7A2821438448000AA691 /* AlertTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2621438448000AA691 /* AlertTransitioningDelegate.swift */; };
 		909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A292143844D000AA691 /* TransitionAnimatorable.swift */; };
 		909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2B21438513000AA691 /* SphereParameterViewController.swift */; };
+		909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4321440E7E000AA691 /* LightingViewController.swift */; };
+		909A7A4621440E8E000AA691 /* LightingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4521440E8E000AA691 /* LightingRenderer.swift */; };
+		909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4721440E93000AA691 /* LightingShaders.metal */; };
+		909A7A572144166E000AA691 /* GSMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; };
+		909A7A5E2144166E000AA691 /* GSMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A5D2144166E000AA691 /* GSMathTests.swift */; };
+		909A7A602144166E000AA691 /* GSMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 909A7A502144166E000AA691 /* GSMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		909A7A632144166E000AA691 /* GSMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; };
+		909A7A642144166E000AA691 /* GSMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		909A7A6C2144167B000AA691 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Matrix.swift */; };
+		909A7A6E214416A7000AA691 /* simd+util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A6D214416A7000AA691 /* simd+util.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		909A7A582144166E000AA691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 900B4E1F21280C2300554676 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 909A7A4D2144166E000AA691;
+			remoteInfo = GSMath;
+		};
+		909A7A612144166E000AA691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 900B4E1F21280C2300554676 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 909A7A4D2144166E000AA691;
+			remoteInfo = GSMath;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		909A7A682144166E000AA691 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				909A7A642144166E000AA691 /* GSMath.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		14648373212AC23D004C76E1 /* CubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
-		14FF5B45212D7EE900210AEC /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		14FF5B45212D7EE900210AEC /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronViewController.swift; sourceTree = "<group>"; };
 		9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronRenderer.swift; sourceTree = "<group>"; };
 		9003A0E0213DFA82008A530F /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
@@ -68,6 +108,16 @@
 		909A7A2621438448000AA691 /* AlertTransitioningDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertTransitioningDelegate.swift; sourceTree = "<group>"; };
 		909A7A292143844D000AA691 /* TransitionAnimatorable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimatorable.swift; sourceTree = "<group>"; };
 		909A7A2B21438513000AA691 /* SphereParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereParameterViewController.swift; sourceTree = "<group>"; };
+		909A7A4321440E7E000AA691 /* LightingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingViewController.swift; sourceTree = "<group>"; };
+		909A7A4521440E8E000AA691 /* LightingRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderer.swift; sourceTree = "<group>"; };
+		909A7A4721440E93000AA691 /* LightingShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LightingShaders.metal; sourceTree = "<group>"; };
+		909A7A4E2144166E000AA691 /* GSMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GSMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		909A7A502144166E000AA691 /* GSMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSMath.h; sourceTree = "<group>"; };
+		909A7A512144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		909A7A562144166E000AA691 /* GSMathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GSMathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		909A7A5D2144166E000AA691 /* GSMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSMathTests.swift; sourceTree = "<group>"; };
+		909A7A5F2144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		909A7A6D214416A7000AA691 /* simd+util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +125,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				909A7A632144166E000AA691 /* GSMath.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		909A7A4B2144166E000AA691 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		909A7A532144166E000AA691 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909A7A572144166E000AA691 /* GSMath.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +161,6 @@
 		14FF5B44212D7EDD00210AEC /* Math */ = {
 			isa = PBXGroup;
 			children = (
-				14FF5B45212D7EE900210AEC /* Math.swift */,
 			);
 			path = Math;
 			sourceTree = "<group>";
@@ -114,6 +179,8 @@
 			isa = PBXGroup;
 			children = (
 				900B4E2921280C2300554676 /* MetalGraphics */,
+				909A7A4F2144166E000AA691 /* GSMath */,
+				909A7A5C2144166E000AA691 /* GSMathTests */,
 				900B4E2821280C2300554676 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -122,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				900B4E2721280C2300554676 /* MetalGraphics.app */,
+				909A7A4E2144166E000AA691 /* GSMath.framework */,
+				909A7A562144166E000AA691 /* GSMathTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +233,7 @@
 				14648372212AC223004C76E1 /* Cube */,
 				9003A0DB213CBE62008A530F /* Tetrahedron */,
 				9081561A2141FE5B00E370D6 /* Sphere */,
+				909A7A4221440E4C000AA691 /* Lighting */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -189,7 +259,48 @@
 			path = Sphere;
 			sourceTree = "<group>";
 		};
+		909A7A4221440E4C000AA691 /* Lighting */ = {
+			isa = PBXGroup;
+			children = (
+				909A7A4321440E7E000AA691 /* LightingViewController.swift */,
+				909A7A4521440E8E000AA691 /* LightingRenderer.swift */,
+				909A7A4721440E93000AA691 /* LightingShaders.metal */,
+			);
+			path = Lighting;
+			sourceTree = "<group>";
+		};
+		909A7A4F2144166E000AA691 /* GSMath */ = {
+			isa = PBXGroup;
+			children = (
+				14FF5B45212D7EE900210AEC /* Matrix.swift */,
+				909A7A6D214416A7000AA691 /* simd+util.swift */,
+				909A7A502144166E000AA691 /* GSMath.h */,
+				909A7A512144166E000AA691 /* Info.plist */,
+			);
+			path = GSMath;
+			sourceTree = "<group>";
+		};
+		909A7A5C2144166E000AA691 /* GSMathTests */ = {
+			isa = PBXGroup;
+			children = (
+				909A7A5D2144166E000AA691 /* GSMathTests.swift */,
+				909A7A5F2144166E000AA691 /* Info.plist */,
+			);
+			path = GSMathTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		909A7A492144166E000AA691 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909A7A602144166E000AA691 /* GSMath.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		900B4E2621280C2300554676 /* MetalGraphics */ = {
@@ -199,15 +310,53 @@
 				900B4E2321280C2300554676 /* Sources */,
 				900B4E2421280C2300554676 /* Frameworks */,
 				900B4E2521280C2300554676 /* Resources */,
+				909A7A682144166E000AA691 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				909A7A622144166E000AA691 /* PBXTargetDependency */,
 			);
 			name = MetalGraphics;
 			productName = MetalGraphics;
 			productReference = 900B4E2721280C2300554676 /* MetalGraphics.app */;
 			productType = "com.apple.product-type.application";
+		};
+		909A7A4D2144166E000AA691 /* GSMath */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 909A7A652144166E000AA691 /* Build configuration list for PBXNativeTarget "GSMath" */;
+			buildPhases = (
+				909A7A492144166E000AA691 /* Headers */,
+				909A7A4A2144166E000AA691 /* Sources */,
+				909A7A4B2144166E000AA691 /* Frameworks */,
+				909A7A4C2144166E000AA691 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GSMath;
+			productName = GSMath;
+			productReference = 909A7A4E2144166E000AA691 /* GSMath.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		909A7A552144166E000AA691 /* GSMathTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 909A7A692144166E000AA691 /* Build configuration list for PBXNativeTarget "GSMathTests" */;
+			buildPhases = (
+				909A7A522144166E000AA691 /* Sources */,
+				909A7A532144166E000AA691 /* Frameworks */,
+				909A7A542144166E000AA691 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				909A7A592144166E000AA691 /* PBXTargetDependency */,
+			);
+			name = GSMathTests;
+			productName = GSMathTests;
+			productReference = 909A7A562144166E000AA691 /* GSMathTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -222,6 +371,12 @@
 					900B4E2621280C2300554676 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1000;
+					};
+					909A7A4D2144166E000AA691 = {
+						CreatedOnToolsVersion = 10.0;
+					};
+					909A7A552144166E000AA691 = {
+						CreatedOnToolsVersion = 10.0;
 					};
 				};
 			};
@@ -239,6 +394,8 @@
 			projectRoot = "";
 			targets = (
 				900B4E2621280C2300554676 /* MetalGraphics */,
+				909A7A4D2144166E000AA691 /* GSMath */,
+				909A7A552144166E000AA691 /* GSMathTests */,
 			);
 		};
 /* End PBXProject section */
@@ -254,6 +411,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		909A7A4C2144166E000AA691 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		909A7A542144166E000AA691 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -265,6 +436,7 @@
 				908156202141FF7500E370D6 /* SphereRenderer.swift in Sources */,
 				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
 				90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */,
+				909A7A4621440E8E000AA691 /* LightingRenderer.swift in Sources */,
 				906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */,
 				908156222141FF9000E370D6 /* SphereShaders.metal in Sources */,
 				900B4E4A212A457500554676 /* HelloTriangleShaders.metal in Sources */,
@@ -273,6 +445,7 @@
 				909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
 				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
+				909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */,
 				90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */,
 				909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */,
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,
@@ -280,8 +453,8 @@
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
 				9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
+				909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */,
 				90815624214204CE00E370D6 /* Renderer.swift in Sources */,
-				14FF5B46212D7EE900210AEC /* Math.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
 				909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */,
 				9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */,
@@ -289,7 +462,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		909A7A4A2144166E000AA691 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909A7A6E214416A7000AA691 /* simd+util.swift in Sources */,
+				909A7A6C2144167B000AA691 /* Matrix.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		909A7A522144166E000AA691 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909A7A5E2144166E000AA691 /* GSMathTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		909A7A592144166E000AA691 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 909A7A4D2144166E000AA691 /* GSMath */;
+			targetProxy = 909A7A582144166E000AA691 /* PBXContainerItemProxy */;
+		};
+		909A7A622144166E000AA691 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 909A7A4D2144166E000AA691 /* GSMath */;
+			targetProxy = 909A7A612144166E000AA691 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		900B4E2E21280C2300554676 /* Main.storyboard */ = {
@@ -430,6 +633,7 @@
 		900B4E3A21280C2400554676 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
@@ -456,6 +660,7 @@
 		900B4E3B21280C2400554676 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
@@ -478,6 +683,102 @@
 			};
 			name = Release;
 		};
+		909A7A662144166E000AA691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = GSMath/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lowe.GSMath;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		909A7A672144166E000AA691 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = GSMath/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lowe.GSMath;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		909A7A6A2144166E000AA691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				INFOPLIST_FILE = GSMathTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lowe.GSMathTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		909A7A6B2144166E000AA691 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
+				INFOPLIST_FILE = GSMathTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lowe.GSMathTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -495,6 +796,24 @@
 			buildConfigurations = (
 				900B4E3A21280C2400554676 /* Debug */,
 				900B4E3B21280C2400554676 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		909A7A652144166E000AA691 /* Build configuration list for PBXNativeTarget "GSMath" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				909A7A662144166E000AA691 /* Debug */,
+				909A7A672144166E000AA691 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		909A7A692144166E000AA691 /* Build configuration list for PBXNativeTarget "GSMathTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				909A7A6A2144166E000AA691 /* Debug */,
+				909A7A6B2144166E000AA691 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

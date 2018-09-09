@@ -4,10 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>MetalGraphics.xcscheme</key>
+		<key>GSMath.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>MetalGraphics.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>900B4E2621280C2300554676</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>909A7A4D2144166E000AA691</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>909A7A552144166E000AA691</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

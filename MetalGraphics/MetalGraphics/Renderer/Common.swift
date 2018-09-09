@@ -43,6 +43,22 @@ struct Vertex: QueryMemoryLayout, CustomStringConvertible {
     }
 }
 
+extension Vertex {
+    static func + (lhs: Vertex, rhs: Vertex) -> Vertex {
+        let position = lhs.position + rhs.position
+        let color = lhs.color + rhs.color
+        return Vertex(position: float4(position.x, position.y, position.z, 1),
+                      color: float4(color.x, color.y, color.z, 1))
+    }
+    
+    func normalize() -> Vertex {
+        let position3 = self.position.xyz.normalize
+        let color3 = self.color.xyz.normalize
+        return Vertex(position: simd_make_float4(position3, 1),
+                      color: simd_make_float4(color3, 1))
+    }
+}
+
 struct Uniforms: QueryMemoryLayout {
     var modelViewProjectionMatrix: float4x4
 }
