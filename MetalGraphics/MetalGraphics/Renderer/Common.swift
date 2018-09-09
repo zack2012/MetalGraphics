@@ -60,7 +60,23 @@ extension Vertex {
 }
 
 struct Uniforms: QueryMemoryLayout {
-    var modelViewProjectionMatrix: float4x4
+    var mvp: float4x4
+    var world: float4x4
+    
+    init(mvp: float4x4, world: float4x4 = float4x4()) {
+        self.mvp = mvp
+        self.world = world
+    }
+}
+
+struct Material: QueryMemoryLayout {
+    var diffuse: float4
+    var specular: float4
+}
+
+struct PointLight: QueryMemoryLayout {
+    var position: float4
+    var intensity: float4
 }
 
 enum GraphicsError: Error {

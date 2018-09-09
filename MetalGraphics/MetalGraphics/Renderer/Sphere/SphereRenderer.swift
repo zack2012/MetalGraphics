@@ -90,7 +90,7 @@ class SphereRenderer: NSObject, Renderer {
     }
     
     func draw(in view: MTKView) {
-        updateUniformBuffer(view: view)
+        updateDynamicBuffer(view: view)
         
         guard let commandBuffer = commandQueue.makeCommandBuffer() else {
             return

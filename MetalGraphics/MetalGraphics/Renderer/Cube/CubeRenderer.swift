@@ -127,7 +127,7 @@ class CubeRenderer: CubeViewDelegate {
         let projection = GSMath.perspective(aspect: apsect, fovy: 72.radian, near: 1, far: 100)
         let mat = projection * translate * rotate2 * rotate1 * scale
         
-        let uniforms = Uniforms(modelViewProjectionMatrix: mat)
+        let uniforms = Uniforms(mvp: mat)
         let uniformRawBuffer = uniformBuffer?.contents()
         uniformRawBuffer?.storeBytes(of: uniforms,
                                      toByteOffset: Uniforms.memoryStride * bufferIndex,

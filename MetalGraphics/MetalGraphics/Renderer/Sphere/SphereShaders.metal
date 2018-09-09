@@ -9,20 +9,13 @@
 #include <metal_stdlib>
 using namespace metal;
 
-struct Vertex {
-    float4 position [[position]];
-    float4 color;
-};
-
-struct Uniforms {
-    float4x4 modelViewProjectionMatrix;
-};
+#include "../ShaderTypes.h"
 
 vertex Vertex sphereShader(device Vertex *vertics [[buffer(0)]],
                                 constant Uniforms *uniforms [[buffer(1)]],
                                 uint vid [[vertex_id]]) {
     Vertex vertexOut;
-    vertexOut.position = uniforms->modelViewProjectionMatrix * vertics[vid].position;
+    vertexOut.position = uniforms->mvp * vertics[vid].position;
     vertexOut.color = vertics[vid].color;
     
     return vertexOut;

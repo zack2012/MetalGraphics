@@ -118,6 +118,7 @@
 		909A7A5D2144166E000AA691 /* GSMathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSMathTests.swift; sourceTree = "<group>"; };
 		909A7A5F2144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		909A7A6D214416A7000AA691 /* simd+util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+util.swift"; sourceTree = "<group>"; };
+		909A7A6F2144FD25000AA691 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +229,7 @@
 			children = (
 				9003A0E0213DFA82008A530F /* Common.swift */,
 				90815623214204CE00E370D6 /* Renderer.swift */,
+				909A7A6F2144FD25000AA691 /* ShaderTypes.h */,
 				14FF5B44212D7EDD00210AEC /* Math */,
 				900B4E44212815C100554676 /* HelloWorld */,
 				14648372212AC223004C76E1 /* Cube */,
