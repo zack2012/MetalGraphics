@@ -21,15 +21,15 @@ class LightingRenderer: NSObject, Renderer {
         return 1.5
     }
     
-    private var device: MTLDevice
-    private var commandQueue: MTLCommandQueue
+    var device: MTLDevice
+    var commandQueue: MTLCommandQueue
     
-    private var renderPipelineState: MTLRenderPipelineState
-    private var verticsBuffer: MTLBuffer?
-    private var vertics: [Vertex] = []
+    var renderPipelineState: MTLRenderPipelineState!
+    var verticsBuffer: MTLBuffer?
+    var vertics: [Vertex] = []
     
-    private var lightBuffer: MTLBuffer?
-    private var materialBuffer: MTLBuffer?
+    var lightBuffer: MTLBuffer?
+    var materialBuffer: MTLBuffer?
     
     var uniformBuffer: MTLBuffer?
     
@@ -37,30 +37,32 @@ class LightingRenderer: NSObject, Renderer {
         self.device = mtkView.device!
         self.commandQueue = self.device.makeCommandQueue()!
         
+        uniformBuffer = device.makeBuffer(length: Uniforms.memoryStride, options: .storageModeShared)
+        
+        super.init()
+        
         let renderPipelineDesc = MTLRenderPipelineDescriptor()
         renderPipelineDesc.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat
         
         let library = device.makeDefaultLibrary()!
-        let vertexFunc = library.makeFunction(name: "lightingShader")
-        let fragmentFunc = library.makeFunction(name: "lightingFragment")
+        let (vertex, fragment) = shaderName()
+        let vertexFunc = library.makeFunction(name: vertex)
+        let fragmentFunc = library.makeFunction(name: fragment)
         
         renderPipelineDesc.vertexFunction = vertexFunc
         renderPipelineDesc.fragmentFunction = fragmentFunc
         
         self.renderPipelineState = try! device.makeRenderPipelineState(descriptor: renderPipelineDesc)
         
-        super.init()
-        
         mtkView.delegate = self
-        
-        uniformBuffer = device.makeBuffer(length: Uniforms.memoryStride, options: .storageModeShared)
-        lightBuffer = device.makeBuffer(length: PointLight.memoryStride, options: .storageModeShared)
-        materialBuffer = device.makeBuffer(length: Material.memoryStride, options: .storageModeShared)
-        
         makeBuffer(n: iteration)
     }
     
-    func makeBuffer(n: Int) {
+    func shaderName() -> (vertex: String, fragment: String) {
+        return ("", "")
+    }
+    
+    private func makeBuffer(n: Int) {
         self.vertics.removeAll(keepingCapacity: true)
         
         let vertics = [
@@ -98,6 +100,13 @@ class LightingRenderer: NSObject, Renderer {
     }
     
     func updateDynamicBuffer(view: MTKView) {
+        var uniforms = makeUniforms(view: view)
+
+        let uniformRawBuffer = uniformBuffer?.contents()
+        uniformRawBuffer?.copyMemory(from: &uniforms, byteCount: Uniforms.memoryStride)
+    }
+    
+    func makeUniforms(view: MTKView) -> Uniforms {
         let rotate1 = GSMath.rotation(axis: float3(1, 0, 0), angle: rotationX)
         let rotate2 = GSMath.rotation(axis: float3(0, 1, 0), angle: rotationY)
         let scale = GSMath.scale(scaleFactor)
@@ -108,16 +117,8 @@ class LightingRenderer: NSObject, Renderer {
         let world = translate * rotate2 * rotate1 * scale
         let mat = projection * world
         
-        var uniforms = Uniforms(mvp: mat, world: world)
-        let uniformRawBuffer = uniformBuffer?.contents()
-        uniformRawBuffer?.copyMemory(from: &uniforms, byteCount: Uniforms.memoryStride)
-        
-        var pointLight = PointLight(position: float4(5, 5, 5, 1),
-                                    intensity: float4(1, 0.5, 0.8, 1))
-        lightBuffer?.contents().copyMemory(from: &pointLight, byteCount: lightBuffer!.length)
-        
-        var material = Material(diffuse: float4(0.8, 0.3, 0.5, 1), specular: float4())
-        materialBuffer?.contents().copyMemory(from: &material, byteCount: materialBuffer!.length)
+        let uniforms = Uniforms(mvp: mat, world: world)
+        return uniforms
     }
     
     func draw(in view: MTKView) {

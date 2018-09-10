@@ -45,8 +45,8 @@ class ViewController: UIViewController {
         models.append(model)
         
         model.header = "光照"
-        model.content = ["Blinn-Phong Lighting Model"]
-        model.viewControllerClasses = [LightingViewController.self]
+        model.content = ["Lambertian Shading Model"]
+        model.viewControllerClasses = [LambertianViewController.self]
         models.append(model)
     }
 }

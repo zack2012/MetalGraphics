@@ -11,13 +11,22 @@ import Metal
 import MetalKit
 
 class LightingViewController: MetalViewController {
-    
+    var transitionDelegate: AlertTransitioningDelegate?
+
     override var renderClass: Renderer.Type {
-        return LightingRenderer.self
+        fatalError()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mtkView.preferredFramesPerSecond = 30
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "参数调整",
+                                                            style: .plain, target: self,
+                                                            action: #selector(rightButtonTapped(_:)))
+    }
+    
+    @objc func rightButtonTapped(_ sender: UIBarButtonItem) {
+       
     }
 }
