@@ -24,8 +24,16 @@ vertex Vertex lambertianShader(uint vid [[vertex_id]],
     float4 normalVec = normalize(worldPosition - centerInWorldPosition);
     vertexOut.position = uniforms->mvp * vertics[vid].position;
     float cosValue = max(0.0, dot(normalVec, lightVec));
-    float4 cosVec = float4(cosValue, cosValue, cosValue, 1);
-    vertexOut.color = light->intensity * material->diffuse * cosVec;
+    float3 cosVec = float3(cosValue, cosValue, cosValue);
+
+    // 环境光系数
+    float3 ca = float3(0.3, 0.2, 0.2);
+    float3 la = float3(0.8, 0.8, 0.8);
+    
+    float3 color =  ca * la + material->diffuse.xyz * light->intensity.xyz * cosVec;
+    
+    // 颜色范围要在0～1之间
+    vertexOut.color = clamp(float4(color, 1), float4(), float4(1, 1, 1, 1));
     
     return vertexOut;
 }
