@@ -30,7 +30,8 @@ class LightingRenderer: NSObject, Renderer {
     
     var lightBuffer: MTLBuffer?
     var materialBuffer: MTLBuffer?
-    
+    var viewerBuffer: MTLBuffer?
+
     var uniformBuffer: MTLBuffer?
     
     required init(mtkView: MTKView) {
@@ -149,6 +150,7 @@ class LightingRenderer: NSObject, Renderer {
         encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
         encoder.setVertexBuffer(lightBuffer, offset: 0, index: 2)
         encoder.setVertexBuffer(materialBuffer, offset: 0, index: 3)
+        encoder.setVertexBuffer(viewerBuffer, offset: 0, index: 4)
         
         encoder.drawPrimitives(type: primitiveType, vertexStart: 0, vertexCount: vertics.count)
         encoder.endEncoding()

@@ -47,6 +47,7 @@
 		909A7A642144166E000AA691 /* GSMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		909A7A6C2144167B000AA691 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Matrix.swift */; };
 		909A7A6E214416A7000AA691 /* simd+util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A6D214416A7000AA691 /* simd+util.swift */; };
+		90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		909A7A5F2144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		909A7A6D214416A7000AA691 /* simd+util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+util.swift"; sourceTree = "<group>"; };
 		909A7A6F2144FD25000AA691 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingReflectParameterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 				903E528E2145FC5B005367BD /* LambertianViewController.swift */,
 				903E52892145E23F005367BD /* LambertianRenderer.swift */,
 				903E528C2145F430005367BD /* LambertianParameterViewController.swift */,
+				90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */,
 			);
 			path = Lambertian;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
 				903E528A2145E23F005367BD /* LambertianRenderer.swift in Sources */,
 				909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */,
+				90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */,
 				90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */,
 				909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */,
 				900B4E2D21280C2300554676 /* ViewController.swift in Sources */,

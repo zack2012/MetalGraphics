@@ -72,11 +72,16 @@ struct Uniforms: QueryMemoryLayout {
 struct Material: QueryMemoryLayout {
     var diffuse: float4
     var specular: float4
+    var exponent: UInt32 = 0
 }
 
 struct PointLight: QueryMemoryLayout {
     var position: float4
     var intensity: float4
+}
+
+struct Viewer: QueryMemoryLayout {
+    var position: float4
 }
 
 enum GraphicsError: Error {

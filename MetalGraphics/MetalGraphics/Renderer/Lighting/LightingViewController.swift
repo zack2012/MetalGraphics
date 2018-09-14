@@ -21,12 +21,21 @@ class LightingViewController: MetalViewController {
         super.viewDidLoad()
         mtkView.preferredFramesPerSecond = 30
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "参数调整",
-                                                            style: .plain, target: self,
-                                                            action: #selector(rightButtonTapped(_:)))
+        let barItem1 = UIBarButtonItem(title: "参数调整",
+                                        style: .plain, target: self,
+                                        action: #selector(rightButtonTapped(_:)))
+        let barItem2 = UIBarButtonItem(title: "镜面反射",
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(rightButton1Tapped(_:)))
+        navigationItem.rightBarButtonItems = [barItem1,  barItem2]
     }
     
     @objc func rightButtonTapped(_ sender: UIBarButtonItem) {
        
+    }
+    
+    @objc func rightButton1Tapped(_ sender: UIBarButtonItem) {
+        
     }
 }

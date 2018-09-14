@@ -24,6 +24,7 @@ struct Uniforms {
 struct Material {
     float4 diffuse;
     float4 specular;
+    uint exponent;
 };
 
 struct PointLight {

@@ -21,7 +21,8 @@ class LambertianParameterViewController: UIViewController {
     var pointLight = PointLight(position: float4(5, 5, 5, 1),
                                 intensity: float4(1, 0.5, 0.8, 1))
     var material = Material(diffuse: float4(0.8, 0.3, 0.5, 1),
-                            specular: float4())
+                            specular: float4(),
+                            exponent: 32)
 
     override func viewDidLoad() {
         super.viewDidLoad()
