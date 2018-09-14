@@ -11,13 +11,13 @@ using namespace metal;
 
 #include "../ShaderTypes.h"
 
-vertex Vertex lambertianShader(uint vid [[vertex_id]],
-                               device Vertex *vertics [[buffer(0)]],
-                               constant Uniforms *uniforms [[buffer(1)]],
-                               constant PointLight *light [[buffer(2)]],
-                               constant Material *material [[buffer(3)]],
-                               constant float4   *viewer [[buffer(4)]]
-                               ) {
+vertex Vertex lightingShader(uint vid [[vertex_id]],
+                             device Vertex *vertics [[buffer(0)]],
+                             constant Uniforms *uniforms [[buffer(1)]],
+                             constant PointLight *light [[buffer(2)]],
+                             constant Material *material [[buffer(3)]],
+                             constant float4   *viewer [[buffer(4)]]
+                             ) {
     Vertex vertexOut;
     float4 worldPosition = uniforms->world * vertics[vid].position;
     float4 centerInWorldPosition = uniforms->world * float4(0, 0, 0, 1);
@@ -47,6 +47,6 @@ vertex Vertex lambertianShader(uint vid [[vertex_id]],
     return vertexOut;
 }
 
-fragment float4 lambertianFragment(Vertex inVertex [[stage_in]]) {
+fragment float4 lightingFragment(Vertex inVertex [[stage_in]]) {
     return inVertex.color;
 }

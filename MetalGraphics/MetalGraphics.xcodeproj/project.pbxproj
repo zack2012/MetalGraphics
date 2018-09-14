@@ -24,9 +24,7 @@
 		90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFC212B8A0A00471FE1 /* CubeView.swift */; };
 		90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFF212C3C4200471FE1 /* CubeRenderer.swift */; };
 		90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90127F01212C3DFC00471FE1 /* CubeShaders.metal */; };
-		903E528A2145E23F005367BD /* LambertianRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E52892145E23F005367BD /* LambertianRenderer.swift */; };
-		903E528D2145F430005367BD /* LambertianParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E528C2145F430005367BD /* LambertianParameterViewController.swift */; };
-		903E528F2145FC5B005367BD /* LambertianViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E528E2145FC5B005367BD /* LambertianViewController.swift */; };
+		903E528D2145F430005367BD /* LightingParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E528C2145F430005367BD /* LightingParameterViewController.swift */; };
 		906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 906A3F9B213F618500034EAA /* TetrahedronShaders.metal */; };
 		9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561B2141FE8800E370D6 /* MetalViewController.swift */; };
 		9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561D2141FF2800E370D6 /* SphereViewController.swift */; };
@@ -39,7 +37,7 @@
 		909A7A2D21438513000AA691 /* SphereParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A2B21438513000AA691 /* SphereParameterViewController.swift */; };
 		909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4321440E7E000AA691 /* LightingViewController.swift */; };
 		909A7A4621440E8E000AA691 /* LightingRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4521440E8E000AA691 /* LightingRenderer.swift */; };
-		909A7A4821440E93000AA691 /* LambertianShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4721440E93000AA691 /* LambertianShaders.metal */; };
+		909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A4721440E93000AA691 /* LightingShaders.metal */; };
 		909A7A572144166E000AA691 /* GSMath.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; };
 		909A7A5E2144166E000AA691 /* GSMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A5D2144166E000AA691 /* GSMathTests.swift */; };
 		909A7A602144166E000AA691 /* GSMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 909A7A502144166E000AA691 /* GSMath.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -102,9 +100,7 @@
 		90127EFC212B8A0A00471FE1 /* CubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeView.swift; sourceTree = "<group>"; };
 		90127EFF212C3C4200471FE1 /* CubeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeRenderer.swift; sourceTree = "<group>"; };
 		90127F01212C3DFC00471FE1 /* CubeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CubeShaders.metal; sourceTree = "<group>"; };
-		903E52892145E23F005367BD /* LambertianRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambertianRenderer.swift; sourceTree = "<group>"; };
-		903E528C2145F430005367BD /* LambertianParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LambertianParameterViewController.swift; sourceTree = "<group>"; };
-		903E528E2145FC5B005367BD /* LambertianViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "\bLambertianViewController.swift"; sourceTree = "<group>"; };
+		903E528C2145F430005367BD /* LightingParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingParameterViewController.swift; sourceTree = "<group>"; };
 		906A3F9B213F618500034EAA /* TetrahedronShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TetrahedronShaders.metal; sourceTree = "<group>"; };
 		9081561B2141FE8800E370D6 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		9081561D2141FF2800E370D6 /* SphereViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +113,7 @@
 		909A7A2B21438513000AA691 /* SphereParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereParameterViewController.swift; sourceTree = "<group>"; };
 		909A7A4321440E7E000AA691 /* LightingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingViewController.swift; sourceTree = "<group>"; };
 		909A7A4521440E8E000AA691 /* LightingRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingRenderer.swift; sourceTree = "<group>"; };
-		909A7A4721440E93000AA691 /* LambertianShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LambertianShaders.metal; sourceTree = "<group>"; };
+		909A7A4721440E93000AA691 /* LightingShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = LightingShaders.metal; sourceTree = "<group>"; };
 		909A7A4E2144166E000AA691 /* GSMath.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GSMath.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		909A7A502144166E000AA691 /* GSMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSMath.h; sourceTree = "<group>"; };
 		909A7A512144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -250,17 +246,6 @@
 			path = HelloWorld;
 			sourceTree = "<group>";
 		};
-		903E528B2145F3EE005367BD /* Lambertian */ = {
-			isa = PBXGroup;
-			children = (
-				903E528E2145FC5B005367BD /* LambertianViewController.swift */,
-				903E52892145E23F005367BD /* LambertianRenderer.swift */,
-				903E528C2145F430005367BD /* LambertianParameterViewController.swift */,
-				90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */,
-			);
-			path = Lambertian;
-			sourceTree = "<group>";
-		};
 		9081561A2141FE5B00E370D6 /* Sphere */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,8 +262,9 @@
 			children = (
 				909A7A4321440E7E000AA691 /* LightingViewController.swift */,
 				909A7A4521440E8E000AA691 /* LightingRenderer.swift */,
-				903E528B2145F3EE005367BD /* Lambertian */,
-				909A7A4721440E93000AA691 /* LambertianShaders.metal */,
+				903E528C2145F430005367BD /* LightingParameterViewController.swift */,
+				90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */,
+				909A7A4721440E93000AA691 /* LightingShaders.metal */,
 			);
 			path = Lighting;
 			sourceTree = "<group>";
@@ -448,7 +434,6 @@
 			files = (
 				900B4E43212815BB00554676 /* HelloTriangleView.swift in Sources */,
 				908156202141FF7500E370D6 /* SphereRenderer.swift in Sources */,
-				903E528F2145FC5B005367BD /* LambertianViewController.swift in Sources */,
 				14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */,
 				90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */,
 				909A7A4621440E8E000AA691 /* LightingRenderer.swift in Sources */,
@@ -460,7 +445,6 @@
 				909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
 				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
-				903E528A2145E23F005367BD /* LambertianRenderer.swift in Sources */,
 				909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */,
 				90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */,
 				90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */,
@@ -470,8 +454,8 @@
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
 				9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
-				909A7A4821440E93000AA691 /* LambertianShaders.metal in Sources */,
-				903E528D2145F430005367BD /* LambertianParameterViewController.swift in Sources */,
+				909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */,
+				903E528D2145F430005367BD /* LightingParameterViewController.swift in Sources */,
 				90815624214204CE00E370D6 /* Renderer.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
 				909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  LambertianParameterViewController.swift
+//  LightingParameterViewController.swift
 //  MetalGraphics
 //
 //  Created by lowe on 2018/9/8.
@@ -10,7 +10,7 @@ import UIKit
 import Metal
 import simd
 
-class LambertianParameterViewController: UIViewController {
+class LightingParameterViewController: UIViewController {
     private var lightLabel: UILabel!
     private var diffuseLabel: UILabel!
 

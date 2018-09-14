@@ -14,6 +14,13 @@ class LightingRenderer: NSObject, Renderer {
     var rotationX: Float = 0
     var rotationY: Float = 0
     
+    var pointLight = PointLight(position: float4(5, 5, 5, 1),
+                                intensity: float4(1, 0.5, 0.8, 1))
+    var material = Material(diffuse: float4(0.8, 0.3, 0.5, 1),
+                            specular: float4(),
+                            exponent: 8)
+    var viewer = Viewer(position: float4(3, 3, 10, 1))
+    
     var primitiveType: MTLPrimitiveType = .triangle
     var iteration = 6
     
@@ -57,10 +64,14 @@ class LightingRenderer: NSObject, Renderer {
         
         mtkView.delegate = self
         makeBuffer(n: iteration)
+        
+        lightBuffer = device.makeBuffer(length: PointLight.memoryStride, options: .storageModeShared)
+        materialBuffer = device.makeBuffer(length: Material.memoryStride, options: .storageModeShared)
+        viewerBuffer = device.makeBuffer(length: Viewer.memoryStride, options: .storageModeShared)
     }
     
     func shaderName() -> (vertex: String, fragment: String) {
-        return ("", "")
+        return ("lightingShader", "lightingFragment")
     }
     
     private func makeBuffer(n: Int) {
@@ -105,6 +116,10 @@ class LightingRenderer: NSObject, Renderer {
 
         let uniformRawBuffer = uniformBuffer?.contents()
         uniformRawBuffer?.copyMemory(from: &uniforms, byteCount: Uniforms.memoryStride)
+        
+        lightBuffer?.contents().copyMemory(from: &pointLight, byteCount: lightBuffer!.length)
+        materialBuffer?.contents().copyMemory(from: &material, byteCount: materialBuffer!.length)
+        viewerBuffer?.contents().copyMemory(from: &viewer, byteCount: viewerBuffer!.length)
     }
     
     func makeUniforms(view: MTKView) -> Uniforms {
