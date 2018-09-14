@@ -167,13 +167,6 @@
 			path = Cube;
 			sourceTree = "<group>";
 		};
-		14FF5B44212D7EDD00210AEC /* Math */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Math;
-			sourceTree = "<group>";
-		};
 		9003A0DB213CBE62008A530F /* Tetrahedron */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +231,6 @@
 				9003A0E0213DFA82008A530F /* Common.swift */,
 				90815623214204CE00E370D6 /* Renderer.swift */,
 				909A7A6F2144FD25000AA691 /* ShaderTypes.h */,
-				14FF5B44212D7EDD00210AEC /* Math */,
 				900B4E44212815C100554676 /* HelloWorld */,
 				14648372212AC223004C76E1 /* Cube */,
 				9003A0DB213CBE62008A530F /* Tetrahedron */,
