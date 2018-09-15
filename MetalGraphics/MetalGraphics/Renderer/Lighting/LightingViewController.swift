@@ -51,7 +51,7 @@ class LightingViewController: MetalViewController {
         delegate.originFrame = CGRect(x: self.view.bounds.midX - presentMaxWidth / 2,
                                       y: self.view.bounds.maxY,
                                       width: presentMaxWidth,
-                                      height: 320)
+                                      height: 500)
         delegate.targetFrame = CGRect(x: delegate.originFrame.origin.x,
                                       y: 120,
                                       width: delegate.originFrame.width,
