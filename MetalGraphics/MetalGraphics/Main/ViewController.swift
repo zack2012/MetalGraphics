@@ -48,6 +48,11 @@ class ViewController: UIViewController {
         model.content = ["Blinn-Phong Shading Model"]
         model.viewControllerClasses = [LightingViewController.self]
         models.append(model)
+        
+        model.header = "Model IO"
+        model.content = ["Use Model IO import Model"]
+        model.viewControllerClasses = [ModelIOViewController.self]
+        models.append(model)
     }
 }
 

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		14648374212AC23D004C76E1 /* CubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14648373212AC23D004C76E1 /* CubeViewController.swift */; };
+		147B42D421649D7D0096053E /* ModelIOViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147B42D321649D7D0096053E /* ModelIOViewController.swift */; };
+		147B42D62164C22B0096053E /* teapot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 147B42D52164C22B0096053E /* teapot.obj */; };
+		147B42D82164C2360096053E /* dragon.obj in Resources */ = {isa = PBXBuildFile; fileRef = 147B42D72164C2360096053E /* dragon.obj */; };
 		9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */; };
 		9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */; };
 		9003A0E1213DFA82008A530F /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9003A0E0213DFA82008A530F /* Common.swift */; };
@@ -81,6 +84,9 @@
 
 /* Begin PBXFileReference section */
 		14648373212AC23D004C76E1 /* CubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeViewController.swift; sourceTree = "<group>"; };
+		147B42D321649D7D0096053E /* ModelIOViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelIOViewController.swift; sourceTree = "<group>"; };
+		147B42D52164C22B0096053E /* teapot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teapot.obj; sourceTree = "<group>"; };
+		147B42D72164C2360096053E /* dragon.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dragon.obj; sourceTree = "<group>"; };
 		14FF5B45212D7EE900210AEC /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		9003A0DC213CBEA3008A530F /* TetrahedronViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronViewController.swift; sourceTree = "<group>"; };
 		9003A0DE213DF78D008A530F /* TetrahedronRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TetrahedronRenderer.swift; sourceTree = "<group>"; };
@@ -163,6 +169,16 @@
 			path = Cube;
 			sourceTree = "<group>";
 		};
+		147B42D221649D4A0096053E /* ModelIO */ = {
+			isa = PBXGroup;
+			children = (
+				147B42D72164C2360096053E /* dragon.obj */,
+				147B42D52164C22B0096053E /* teapot.obj */,
+				147B42D321649D7D0096053E /* ModelIOViewController.swift */,
+			);
+			path = ModelIO;
+			sourceTree = "<group>";
+		};
 		9003A0DB213CBE62008A530F /* Tetrahedron */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +248,7 @@
 				9003A0DB213CBE62008A530F /* Tetrahedron */,
 				9081561A2141FE5B00E370D6 /* Sphere */,
 				909A7A4221440E4C000AA691 /* Lighting */,
+				147B42D221649D4A0096053E /* ModelIO */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -405,6 +422,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147B42D62164C22B0096053E /* teapot.obj in Resources */,
+				147B42D82164C2360096053E /* dragon.obj in Resources */,
 				900B4E3521280C2400554676 /* LaunchScreen.storyboard in Resources */,
 				900B4E3221280C2400554676 /* Assets.xcassets in Resources */,
 				900B4E3021280C2300554676 /* Main.storyboard in Resources */,
@@ -444,6 +463,7 @@
 				909A7A2821438448000AA691 /* AlertTransitioningDelegate.swift in Sources */,
 				909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
+				147B42D421649D7D0096053E /* ModelIOViewController.swift in Sources */,
 				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
 				909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */,
 				90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */,
@@ -641,7 +661,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = 4RMR763JXJ;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -668,7 +688,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = 4RMR763JXJ;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -692,7 +712,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -721,7 +741,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 7H237A2BEL;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
