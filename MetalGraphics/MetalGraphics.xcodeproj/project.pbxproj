@@ -48,6 +48,8 @@
 		909A7A642144166E000AA691 /* GSMath.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 909A7A4E2144166E000AA691 /* GSMath.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		909A7A6C2144167B000AA691 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FF5B45212D7EE900210AEC /* Matrix.swift */; };
 		909A7A6E214416A7000AA691 /* simd+util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909A7A6D214416A7000AA691 /* simd+util.swift */; };
+		90D6D7A721657B2300E72F88 /* ModelIORender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D6D7A621657B2300E72F88 /* ModelIORender.swift */; };
+		90D6D7A921657D1C00E72F88 /* ModelIOShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90D6D7A821657D1C00E72F88 /* ModelIOShaders.metal */; };
 		90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -128,6 +130,8 @@
 		909A7A5F2144166E000AA691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		909A7A6D214416A7000AA691 /* simd+util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "simd+util.swift"; sourceTree = "<group>"; };
 		909A7A6F2144FD25000AA691 /* ShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		90D6D7A621657B2300E72F88 /* ModelIORender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelIORender.swift; sourceTree = "<group>"; };
+		90D6D7A821657D1C00E72F88 /* ModelIOShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ModelIOShaders.metal; sourceTree = "<group>"; };
 		90E7AF4A214B44B0005E4331 /* LightingReflectParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingReflectParameterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +179,8 @@
 				147B42D72164C2360096053E /* dragon.obj */,
 				147B42D52164C22B0096053E /* teapot.obj */,
 				147B42D321649D7D0096053E /* ModelIOViewController.swift */,
+				90D6D7A621657B2300E72F88 /* ModelIORender.swift */,
+				90D6D7A821657D1C00E72F88 /* ModelIOShaders.metal */,
 			);
 			path = ModelIO;
 			sourceTree = "<group>";
@@ -473,10 +479,12 @@
 				900B4E2B21280C2300554676 /* AppDelegate.swift in Sources */,
 				900B4E48212817EC00554676 /* BaseViewController.swift in Sources */,
 				9003A0DF213DF78D008A530F /* TetrahedronRenderer.swift in Sources */,
+				90D6D7A921657D1C00E72F88 /* ModelIOShaders.metal in Sources */,
 				90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */,
 				909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */,
 				903E528D2145F430005367BD /* LightingParameterViewController.swift in Sources */,
 				90815624214204CE00E370D6 /* Renderer.swift in Sources */,
+				90D6D7A721657B2300E72F88 /* ModelIORender.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
 				909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */,
 				9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */,
@@ -661,7 +669,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4RMR763JXJ;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -688,7 +696,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4RMR763JXJ;
+				DEVELOPMENT_TEAM = 7H237A2BEL;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = MetalGraphics/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

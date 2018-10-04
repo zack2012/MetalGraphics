@@ -11,5 +11,7 @@ import Metal
 import MetalKit
 
 class ModelIOViewController: MetalViewController {
-    
+    override var renderClass: Renderer.Type {
+        return ModelIORenderer.self
+    }
 }
