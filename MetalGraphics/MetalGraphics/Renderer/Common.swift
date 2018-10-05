@@ -62,10 +62,12 @@ extension Vertex {
 struct Uniforms: QueryMemoryLayout {
     var mvp: float4x4
     var world: float4x4
+    var normal: float3x3
     
-    init(mvp: float4x4, world: float4x4 = float4x4()) {
+    init(mvp: float4x4, world: float4x4 = float4x4(), normal: float3x3 = float3x3()) {
         self.mvp = mvp
         self.world = world
+        self.normal = normal
     }
 }
 
@@ -86,4 +88,11 @@ struct Viewer: QueryMemoryLayout {
 
 enum GraphicsError: Error {
     case isNil(message: String)
+}
+
+extension MTLRenderCommandEncoder {
+    func encode(callback: (MTLRenderCommandEncoder) -> Void) {
+        callback(self)
+        endEncoding()
+    }
 }

@@ -11,15 +11,20 @@ import MetalKit
 import ModelIO
 
 class ModelIORenderer: NSObject, Renderer {
+    
     var rotationX: Float = 0
     var rotationY: Float = 0
+    var scaleFactor: Float = 1.4
+    var translate: float3 = float3(0, 0, -5)
     var uniformBuffer: MTLBuffer?
     
     private var device: MTLDevice
     private var commandQueue: MTLCommandQueue
     private var renderPipelineState: MTLRenderPipelineState
+    private var depthStencilState: MTLDepthStencilState
     
-    private var meshes: [MTKMesh]
+    private var dragonMeshes: [MTKMesh]
+    private var teapotMeshes: [MTKMesh]
     
     required init(mtkView: MTKView) {
         self.device = mtkView.device!
@@ -38,6 +43,7 @@ class ModelIORenderer: NSObject, Renderer {
         // position
         mtlVertexDesc.attributes[0].format = .float3
         mtlVertexDesc.attributes[0].offset = 0
+        // if had n bufferIndex, then MTKMesh.vertexBuffers.count == n
         mtlVertexDesc.attributes[0].bufferIndex = 0
         
         // normal
@@ -50,9 +56,20 @@ class ModelIORenderer: NSObject, Renderer {
         renderPipelineDesc.vertexDescriptor = mtlVertexDesc
         renderPipelineDesc.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat
         
+        // set mtkView.depthStencilPixelFormat, the defalut value is .invalid
+        mtkView.depthStencilPixelFormat = .depth32Float
+        renderPipelineDesc.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat
+        
         self.renderPipelineState = try! self.device.makeRenderPipelineState(descriptor: renderPipelineDesc)
         
+        let depthStateDesc = MTLDepthStencilDescriptor()
+        depthStateDesc.depthCompareFunction = .less
+        depthStateDesc.isDepthWriteEnabled = true
+        self.depthStencilState = self.device.makeDepthStencilState(descriptor: depthStateDesc)!
+        
         let mdlVertexDesc = try! MTKModelIOVertexDescriptorFromMetalWithError(mtlVertexDesc)
+        
+        // attribute.name must be set, or draw call will failed
         var attribute = mdlVertexDesc.attributes[0] as! MDLVertexAttribute
         attribute.name = MDLVertexAttributePosition
         attribute = mdlVertexDesc.attributes[1] as! MDLVertexAttribute
@@ -60,11 +77,14 @@ class ModelIORenderer: NSObject, Renderer {
         
         // MTKMeshBufferAllocator must be set, or MTKMesh.newMeshes will be failed
         let bufferAlloctor = MTKMeshBufferAllocator(device: self.device)
+        let dragon = ModelIORenderer.importAssert(name: "dragon",
+                                                  bufferAllocator: bufferAlloctor,
+                                                  vertexDescriptor: mdlVertexDesc)
         let teapot = ModelIORenderer.importAssert(name: "teapot",
                                                   bufferAllocator: bufferAlloctor,
                                                   vertexDescriptor: mdlVertexDesc)
-        (_, self.meshes) = try! MTKMesh.newMeshes(asset: teapot, device: self.device)
-  
+        (_, self.dragonMeshes) = try! MTKMesh.newMeshes(asset: dragon, device: self.device)
+        (_, self.teapotMeshes) = try! MTKMesh.newMeshes(asset: teapot, device: self.device)
         super.init()
         
         mtkView.delegate = self
@@ -81,9 +101,59 @@ class ModelIORenderer: NSObject, Renderer {
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
     
-    func draw(in view: MTKView) {}
+    func draw(in view: MTKView) {
+        guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+            return
+        }
+        
+        guard let drawable = view.currentDrawable,
+            let renderPassDesc = view.currentRenderPassDescriptor else {
+            return
+        }
+        
+        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDesc) else {
+            return
+        }
+        
+        setupEncoder(encoder)
+        scaleFactor = 1.4
+        updateDynamicBuffer(view: view)
+        
+        encoder.encode { encoder in
+            encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
+            draw(encoder: encoder, meshes: self.dragonMeshes)
+        }
+        
+        commandBuffer.present(drawable)
+        commandBuffer.commit()
+    }
     
+    private func encoder(_ encoder: MTLRenderCommandEncoder, callback: (MTLRenderCommandEncoder) -> Void) {
+        callback(encoder)
+        encoder.endEncoding()
+    }
     
+    private func setupEncoder(_ encoder: MTLRenderCommandEncoder) {
+        encoder.setDepthStencilState(depthStencilState)
+        encoder.setCullMode(.back)
+        encoder.setFrontFacing(.counterClockwise)
+        encoder.setRenderPipelineState(renderPipelineState)
+    }
+    
+    private func draw(encoder: MTLRenderCommandEncoder, meshes: [MTKMesh]) {
+        for mesh in meshes {
+            for (i, meshBuffer) in mesh.vertexBuffers.enumerated() {
+                encoder.setVertexBuffer(meshBuffer.buffer, offset: meshBuffer.offset, index: i)
+            }
+            
+            for submesh in mesh.submeshes {
+                encoder.drawIndexedPrimitives(type: submesh.primitiveType,
+                                              indexCount: submesh.indexCount,
+                                              indexType: submesh.indexType,
+                                              indexBuffer: submesh.indexBuffer.buffer,
+                                              indexBufferOffset: submesh.indexBuffer.offset)
+            }
+        }
+    }
 }
-
 

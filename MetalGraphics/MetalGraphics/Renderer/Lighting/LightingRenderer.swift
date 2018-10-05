@@ -122,21 +122,6 @@ class LightingRenderer: NSObject, Renderer {
         viewerBuffer?.contents().copyMemory(from: &viewer, byteCount: viewerBuffer!.length)
     }
     
-    func makeUniforms(view: MTKView) -> Uniforms {
-        let rotate1 = GSMath.rotation(axis: float3(1, 0, 0), angle: rotationX)
-        let rotate2 = GSMath.rotation(axis: float3(0, 1, 0), angle: rotationY)
-        let scale = GSMath.scale(scaleFactor)
-        let translate = GSMath.translate(x: 0, y: 0, z: -5)
-        let size = view.drawableSize
-        let apsect = Float(size.width / size.height)
-        let projection = GSMath.perspective(aspect: apsect, fovy: 72.radian, near: 1, far: 100)
-        let world = translate * rotate2 * rotate1 * scale
-        let mat = projection * world
-        
-        let uniforms = Uniforms(mvp: mat, world: world)
-        return uniforms
-    }
-    
     func draw(in view: MTKView) {
         updateDynamicBuffer(view: view)
         

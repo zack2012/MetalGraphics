@@ -19,6 +19,7 @@ struct Vertex {
 struct Uniforms {
     float4x4 mvp;
     float4x4 world;
+    float3x3 normal;
 };
 
 struct Material {

@@ -11,46 +11,45 @@ using namespace metal;
 
 #include "../ShaderTypes.h"
 
-vertex Vertex modelIOShader(uint vid [[vertex_id]],
-                             device Vertex *vertics [[buffer(0)]],
-                             constant Uniforms *uniforms [[buffer(1)]],
-                             constant PointLight *light [[buffer(2)]],
-                             constant Material *material [[buffer(3)]],
-                             constant float4   *viewer [[buffer(4)]]
-                             ) {
+struct VertexInput {
+    float3 position [[attribute(0)]];
+    float3 normal [[attribute(1)]];
+};
+
+vertex Vertex modelIOShader(VertexInput in [[stage_in]],
+                            constant Uniforms *uniforms [[buffer(1)]]
+                            ) {
     Vertex vertexOut;
 
-    // 将顶点变换到世界坐标系
-    float4 worldPosition = uniforms->world * vertics[vid].position;
-    float4 centerInWorldPosition = uniforms->world * float4(0, 0, 0, 1);
+    float4 position = float4(in.position, 1);
+    vertexOut.position = uniforms->mvp * position;
+    float4 world = uniforms->world * position;
+    float3 normal = uniforms->normal * in.normal;
+    
+    float3 lightPosition = float3(10, 10, 10);
     
     // 指向光源的单位向量
-    float4 lightVec = normalize(light->position - worldPosition);
+    float3 lightVec = normalize(lightPosition - world.xyz);
     
-    // 法向量
-    float4 normalVec = normalize(worldPosition - centerInWorldPosition);
-    
-    vertexOut.position = uniforms->mvp * vertics[vid].position;
-    
-    float cosValue = max(0.0, dot(normalVec, lightVec));
+    float cosValue = max(0.0, dot(normal, lightVec));
     float3 cosVec = float3(cosValue, cosValue, cosValue);
-
+    
     // 环境光系数
-    float3 ca = float3(0.3, 0.2, 0.2);
-    float3 la = float3(0.8, 0.0, 0.0);
+    float3 ca = float3(0.2, 0.2, 0.2);
+    float3 la = float3(0.8, 0.8, 0.8);
     
     // 镜面反射系数
     float3 cr = float3(0.7, 0.7, 0.7);
-    float3 lr = light->intensity.xyz;
+    float3 lr = float3(0.8, 0.8, 0.8);
     
-    uint p = material->exponent;
-    float3 e = normalize(viewer->xyz - worldPosition.xyz);
-    float3 h = (lightVec.xyz + e) / length(lightVec.xyz + e);
-    float rcosValue = max(0.0, dot(h, normalVec.xyz));
+    uint p = 4;
+    float3 viewer = float3(3, 3, 10);
+    float3 e = normalize(viewer - world.xyz);
+    float3 h = (lightVec + e) / length(lightVec + e);
+    float rcosValue = max(0.0, dot(h, normal));
     float3 rcosVec = float3(rcosValue);
-    
-    float3 color =  ca * la + material->diffuse.xyz * light->intensity.xyz * cosVec + cr * lr *     pow(rcosVec, p);
-    
+
+    float3 color = ca * la + float3(0.8, 0.8, 0.8) * float3(0.8, 0.8, 0.8) * cosVec + cr * lr * pow(rcosVec, p);
     // 颜色范围要在0～1之间
     vertexOut.color = clamp(float4(color, 1), float4(), float4(1, 1, 1, 1));
     
