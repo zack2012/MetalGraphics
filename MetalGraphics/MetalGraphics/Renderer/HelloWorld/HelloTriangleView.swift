@@ -66,13 +66,10 @@ class HelloTriangleView: UIView {
                                             1, 1))
         mat.columns.3.x = -1
         mat.columns.3.y = -1
-        let length = MemoryLayout.stride(ofValue: mat)
-        withUnsafePointer(to: &mat) {
-            self.matrixBuffer = device.makeBuffer(bytes: $0,
-                                                  length: length,
-                                                  options: .storageModeShared)
-        }
         
+        var uniforms = Uniforms(mvp: mat)
+        self.matrixBuffer = device.makeBuffer(bytes: &uniforms, length: Uniforms.memoryStride, options: .storageModeShared)
+  
         // 获取vertex shader和fragment shader，用于设置render pipeline
         let library = device.makeDefaultLibrary()
         let vertexFun = library?.makeFunction(name: "helloTriangleShader")

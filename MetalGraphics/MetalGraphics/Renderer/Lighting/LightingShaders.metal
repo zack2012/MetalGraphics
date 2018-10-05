@@ -25,10 +25,10 @@ vertex Vertex lightingShader(uint vid [[vertex_id]],
     float4 centerInWorldPosition = uniforms->world * float4(0, 0, 0, 1);
     
     // 指向光源的单位向量
-    float4 lightVec = normalize(light->position - worldPosition);
+    float3 lightVec = normalize(light->position.xyz - worldPosition.xyz);
     
     // 法向量
-    float4 normalVec = normalize(worldPosition - centerInWorldPosition);
+    float3 normalVec = normalize(worldPosition.xyz - centerInWorldPosition.xyz);
     
     vertexOut.position = uniforms->mvp * vertics[vid].position;
     
@@ -49,7 +49,7 @@ vertex Vertex lightingShader(uint vid [[vertex_id]],
     float rcosValue = max(0.0, dot(h, normalVec.xyz));
     float3 rcosVec = float3(rcosValue);
     
-    float3 color =  ca * la + material->diffuse.xyz * light->intensity.xyz * cosVec + cr * lr *     pow(rcosVec, p);
+    float3 color =  ca * la + material->diffuse.xyz * light->intensity.xyz * cosVec + cr * lr * pow(rcosVec, p);
     
     // 颜色范围要在0～1之间
     vertexOut.color = clamp(float4(color, 1), float4(), float4(1, 1, 1, 1));
