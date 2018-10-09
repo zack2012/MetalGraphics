@@ -17,7 +17,7 @@ struct VertexInput {
 };
 
 vertex Vertex modelIOShader(VertexInput in [[stage_in]],
-                            constant Uniforms *uniforms [[buffer(1)]]
+                            constant Uniforms *uniforms [[buffer(2)]]
                             ) {
     Vertex vertexOut;
 

@@ -48,10 +48,14 @@ class ModelIORenderer: NSObject, Renderer {
         
         // normal
         mtlVertexDesc.attributes[1].format = .float3
-        mtlVertexDesc.attributes[1].offset = 12
-        mtlVertexDesc.attributes[1].bufferIndex = 0
+        mtlVertexDesc.attributes[1].offset = 0
+        mtlVertexDesc.attributes[1].bufferIndex = 1
         
-        mtlVertexDesc.layouts[0].stride = 24
+        mtlVertexDesc.layouts[0].stride = 12
+        mtlVertexDesc.layouts[0].stepFunction = .perVertex
+        
+        mtlVertexDesc.layouts[1].stride = 12
+        mtlVertexDesc.layouts[1].stepFunction = .perVertex
         
         renderPipelineDesc.vertexDescriptor = mtlVertexDesc
         renderPipelineDesc.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat
@@ -67,13 +71,35 @@ class ModelIORenderer: NSObject, Renderer {
         depthStateDesc.isDepthWriteEnabled = true
         self.depthStencilState = self.device.makeDepthStencilState(descriptor: depthStateDesc)!
         
-        let mdlVertexDesc = try! MTKModelIOVertexDescriptorFromMetalWithError(mtlVertexDesc)
+//        let mdlVertexDesc = try! MTKModelIOVertexDescriptorFromMetalWithError(mtlVertexDesc)
+//
+//        // attribute.name must be set, or draw call will failed
+//        var attribute = mdlVertexDesc.attributes[0] as! MDLVertexAttribute
+//        attribute.name = MDLVertexAttributePosition
+//        attribute = mdlVertexDesc.attributes[1] as! MDLVertexAttribute
+//        attribute.name = MDLVertexAttributeNormal
         
-        // attribute.name must be set, or draw call will failed
-        var attribute = mdlVertexDesc.attributes[0] as! MDLVertexAttribute
-        attribute.name = MDLVertexAttributePosition
-        attribute = mdlVertexDesc.attributes[1] as! MDLVertexAttribute
-        attribute.name = MDLVertexAttributeNormal
+        let mdlVertexDesc = MDLVertexDescriptor()
+        
+        // position
+        var attr = MDLVertexAttribute(name: MDLVertexAttributePosition,
+                                      format: .float3,
+                                      offset: 0,
+                                      bufferIndex: 0)
+        mdlVertexDesc.addOrReplaceAttribute(attr)
+        
+        // normal
+        attr = MDLVertexAttribute(name: MDLVertexAttributeNormal,
+                                  format: .float3,
+                                  offset: 0,
+                                  bufferIndex: 1)
+        mdlVertexDesc.addOrReplaceAttribute(attr)
+        
+        var layout = MDLVertexBufferLayout(stride: 12)
+        mdlVertexDesc.layouts[0] = layout
+
+        layout = MDLVertexBufferLayout(stride: 12)
+        mdlVertexDesc.layouts[1] = layout
         
         // MTKMeshBufferAllocator must be set, or MTKMesh.newMeshes will be failed
         let bufferAlloctor = MTKMeshBufferAllocator(device: self.device)
@@ -83,6 +109,7 @@ class ModelIORenderer: NSObject, Renderer {
         let teapot = ModelIORenderer.importAssert(name: "teapot",
                                                   bufferAllocator: bufferAlloctor,
                                                   vertexDescriptor: mdlVertexDesc)
+        
         (_, self.dragonMeshes) = try! MTKMesh.newMeshes(asset: dragon, device: self.device)
         (_, self.teapotMeshes) = try! MTKMesh.newMeshes(asset: teapot, device: self.device)
         super.init()
@@ -91,7 +118,7 @@ class ModelIORenderer: NSObject, Renderer {
     }
     
     private static func importAssert(name: String,
-                                     bufferAllocator: MDLMeshBufferAllocator? = nil,
+                                     bufferAllocator: MDLMeshBufferAllocator,
                                      vertexDescriptor: MDLVertexDescriptor? = nil
                                      ) -> MDLAsset {
         let bundle = Bundle.main
@@ -120,7 +147,7 @@ class ModelIORenderer: NSObject, Renderer {
         updateDynamicBuffer(view: view)
         
         encoder.encode { encoder in
-            encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 1)
+            encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
             draw(encoder: encoder, meshes: self.dragonMeshes)
         }
         
