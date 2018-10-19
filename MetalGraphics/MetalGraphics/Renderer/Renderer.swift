@@ -33,9 +33,7 @@ extension Renderer {
     }
     
     func updateDynamicBuffer(view: MTKView) {
-        if uniformBuffer == nil {
-            uniformBuffer = view.device?.makeBuffer(length: Uniforms.memoryStride, options: .storageModeShared)
-        }
+        uniformBuffer = view.device?.makeBuffer(length: Uniforms.memoryStride, options: .storageModeShared)
         
         let uniforms = makeUniforms(view: view)
 

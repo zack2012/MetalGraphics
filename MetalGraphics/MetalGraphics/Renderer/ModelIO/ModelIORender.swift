@@ -21,6 +21,7 @@ class ModelIORenderer: NSObject, Renderer {
     private var device: MTLDevice
     private var commandQueue: MTLCommandQueue
     private var renderPipelineState: MTLRenderPipelineState
+    private var teapotRenderPipelineState: MTLRenderPipelineState
     private var depthStencilState: MTLDepthStencilState
     
     private var dragonMeshes: [MTKMesh]
@@ -65,7 +66,7 @@ class ModelIORenderer: NSObject, Renderer {
         renderPipelineDesc.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat
         
         self.renderPipelineState = try! self.device.makeRenderPipelineState(descriptor: renderPipelineDesc)
-        
+        self.teapotRenderPipelineState = try! self.device.makeRenderPipelineState(descriptor: renderPipelineDesc)
         let depthStateDesc = MTLDepthStencilDescriptor()
         depthStateDesc.depthCompareFunction = .less
         depthStateDesc.isDepthWriteEnabled = true
@@ -142,29 +143,46 @@ class ModelIORenderer: NSObject, Renderer {
             return
         }
         
-        setupEncoder(encoder)
+        setupEncoder(encoder, pipelineState: renderPipelineState)
+        
         scaleFactor = 1.4
         updateDynamicBuffer(view: view)
+        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
         
-        encoder.encode { encoder in
-            encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
-            draw(encoder: encoder, meshes: self.dragonMeshes)
-        }
+        draw(encoder: encoder, meshes: self.dragonMeshes)
+
+        scaleFactor = 0.5
         
+        let currentX = rotationX
+        let currentY = rotationY
+        
+        rotationX = 100 + currentX
+        rotationY = 10 + currentY
+        translate = [0, -2, -5]
+        updateDynamicBuffer(view: view)
+        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
+        
+        draw(encoder: encoder, meshes: self.teapotMeshes)
+    
+        encoder.endEncoding()
+
         commandBuffer.present(drawable)
         commandBuffer.commit()
+        
+        rotationX = currentX
+        rotationY = currentY
+        translate = [0, 1, -5]
     }
     
     private func encoder(_ encoder: MTLRenderCommandEncoder, callback: (MTLRenderCommandEncoder) -> Void) {
         callback(encoder)
-        encoder.endEncoding()
     }
     
-    private func setupEncoder(_ encoder: MTLRenderCommandEncoder) {
+    private func setupEncoder(_ encoder: MTLRenderCommandEncoder, pipelineState: MTLRenderPipelineState) {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
         encoder.setFrontFacing(.counterClockwise)
-        encoder.setRenderPipelineState(renderPipelineState)
+        encoder.setRenderPipelineState(pipelineState)
     }
     
     private func draw(encoder: MTLRenderCommandEncoder, meshes: [MTKMesh]) {

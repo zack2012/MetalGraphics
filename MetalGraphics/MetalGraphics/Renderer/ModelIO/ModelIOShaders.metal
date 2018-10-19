@@ -24,7 +24,9 @@ vertex Vertex modelIOShader(VertexInput in [[stage_in]],
     float4 position = float4(in.position, 1);
     vertexOut.position = uniforms->mvp * position;
     float4 world = uniforms->world * position;
-    float3 normal = uniforms->normal * in.normal;
+    
+    // 法向量必须为单位向量
+    float3 normal = normalize(uniforms->normal * in.normal);
     
     float3 lightPosition = float3(10, 10, 10);
     
@@ -42,10 +44,11 @@ vertex Vertex modelIOShader(VertexInput in [[stage_in]],
     float3 cr = float3(0.7, 0.7, 0.7);
     float3 lr = float3(0.8, 0.8, 0.8);
     
-    uint p = 4;
+    uint p = 8;
     float3 viewer = float3(3, 3, 10);
     float3 e = normalize(viewer - world.xyz);
-    float3 h = (lightVec + e) / length(lightVec + e);
+    float len = length(lightVec + e);
+    float3 h = (lightVec + e) / len;
     float rcosValue = max(0.0, dot(h, normal));
     float3 rcosVec = float3(rcosValue);
 
