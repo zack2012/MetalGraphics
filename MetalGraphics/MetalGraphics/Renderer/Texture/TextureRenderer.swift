@@ -1,8 +1,8 @@
 //
-//  ModelIORender.swift
+//  TextureRenderer.swift
 //  MetalGraphics
 //
-//  Created by lowe on 2018/10/4.
+//  Created by lowe on 2018/10/20.
 //  Copyright © 2018 lowe. All rights reserved.
 //
 
@@ -10,8 +10,7 @@ import Metal
 import MetalKit
 import ModelIO
 
-class ModelIORenderer: NSObject, Renderer {
-    
+class TextureRenderer: NSObject, Renderer {
     var rotationX: Float = 0
     var rotationY: Float = 0
     var scaleFactor: Float = 1.4
@@ -24,8 +23,8 @@ class ModelIORenderer: NSObject, Renderer {
     private var teapotRenderPipelineState: MTLRenderPipelineState
     private var depthStencilState: MTLDepthStencilState
     
-    private var dragonMeshes: [MTKMesh]
-    private var teapotMeshes: [MTKMesh]
+    private var cowMeshes: [MTKMesh]
+    private var cowTexture: MTLTexture
     
     required init(mtkView: MTKView) {
         self.device = mtkView.device!
@@ -34,8 +33,8 @@ class ModelIORenderer: NSObject, Renderer {
         let renderPipelineDesc = MTLRenderPipelineDescriptor()
         
         let library = device.makeDefaultLibrary()!
-        let vertexFunc = library.makeFunction(name: "modelIOShader")
-        let fragmentFunc = library.makeFunction(name: "modelIOFragment")
+        let vertexFunc = library.makeFunction(name: "textureShader")
+        let fragmentFunc = library.makeFunction(name: "textureFragment")
         renderPipelineDesc.vertexFunction = vertexFunc
         renderPipelineDesc.fragmentFunction = fragmentFunc
         
@@ -52,7 +51,12 @@ class ModelIORenderer: NSObject, Renderer {
         mtlVertexDesc.attributes[1].offset = 0
         mtlVertexDesc.attributes[1].bufferIndex = 1
         
-        mtlVertexDesc.layouts[0].stride = 12
+        // uv
+        mtlVertexDesc.attributes[2].format = .float2
+        mtlVertexDesc.attributes[2].offset = 12
+        mtlVertexDesc.attributes[2].bufferIndex = 0
+        
+        mtlVertexDesc.layouts[0].stride = 20
         mtlVertexDesc.layouts[0].stepFunction = .perVertex
         
         mtlVertexDesc.layouts[1].stride = 12
@@ -72,47 +76,29 @@ class ModelIORenderer: NSObject, Renderer {
         depthStateDesc.isDepthWriteEnabled = true
         self.depthStencilState = self.device.makeDepthStencilState(descriptor: depthStateDesc)!
         
-//        let mdlVertexDesc = try! MTKModelIOVertexDescriptorFromMetalWithError(mtlVertexDesc)
-//
-//        // attribute.name must be set, or draw call will failed
-//        var attribute = mdlVertexDesc.attributes[0] as! MDLVertexAttribute
-//        attribute.name = MDLVertexAttributePosition
-//        attribute = mdlVertexDesc.attributes[1] as! MDLVertexAttribute
-//        attribute.name = MDLVertexAttributeNormal
+        let mdlVertexDesc = try! MTKModelIOVertexDescriptorFromMetalWithError(mtlVertexDesc)
         
-        let mdlVertexDesc = MDLVertexDescriptor()
+        // attribute.name must be set, or draw call will failed
+        var attribute = mdlVertexDesc.attributes[0] as! MDLVertexAttribute
+        attribute.name = MDLVertexAttributePosition
+    
+        attribute = mdlVertexDesc.attributes[1] as! MDLVertexAttribute
+        attribute.name = MDLVertexAttributeNormal
         
-        // position
-        var attr = MDLVertexAttribute(name: MDLVertexAttributePosition,
-                                      format: .float3,
-                                      offset: 0,
-                                      bufferIndex: 0)
-        mdlVertexDesc.addOrReplaceAttribute(attr)
-        
-        // normal
-        attr = MDLVertexAttribute(name: MDLVertexAttributeNormal,
-                                  format: .float3,
-                                  offset: 0,
-                                  bufferIndex: 1)
-        mdlVertexDesc.addOrReplaceAttribute(attr)
-        
-        var layout = MDLVertexBufferLayout(stride: 12)
-        mdlVertexDesc.layouts[0] = layout
-
-        layout = MDLVertexBufferLayout(stride: 12)
-        mdlVertexDesc.layouts[1] = layout
+        attribute = mdlVertexDesc.attributes[2] as! MDLVertexAttribute
+        attribute.name = MDLVertexAttributeTextureCoordinate
         
         // MTKMeshBufferAllocator must be set, or MTKMesh.newMeshes will be failed
         let bufferAlloctor = MTKMeshBufferAllocator(device: self.device)
-        let dragon = importAssert(name: "dragon",
-                                  bufferAllocator: bufferAlloctor,
-                                  vertexDescriptor: mdlVertexDesc)
-        let teapot = importAssert(name: "teapot",
-                                  bufferAllocator: bufferAlloctor,
-                                  vertexDescriptor: mdlVertexDesc)
+        let cow = importAssert(name: "spot",
+                               bufferAllocator: bufferAlloctor,
+                               vertexDescriptor: mdlVertexDesc)
         
-        (_, self.dragonMeshes) = try! MTKMesh.newMeshes(asset: dragon, device: self.device)
-        (_, self.teapotMeshes) = try! MTKMesh.newMeshes(asset: teapot, device: self.device)
+        
+        (_, self.cowMeshes) = try! MTKMesh.newMeshes(asset: cow, device: self.device)
+
+        cowTexture = try! loadTexture(device: device, imageName: "spot_texture.png")
+        
         super.init()
         
         mtkView.delegate = self
@@ -127,7 +113,7 @@ class ModelIORenderer: NSObject, Renderer {
         
         guard let drawable = view.currentDrawable,
             let renderPassDesc = view.currentRenderPassDescriptor else {
-            return
+                return
         }
         
         guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDesc) else {
@@ -136,33 +122,17 @@ class ModelIORenderer: NSObject, Renderer {
         
         setupEncoder(encoder, pipelineState: renderPipelineState)
         
-        scaleFactor = 1.4
+        scaleFactor = 3
         updateDynamicBuffer(view: view)
         encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
+        encoder.setFragmentTexture(cowTexture, index: 0)
         
-        draw(encoder: encoder, meshes: self.dragonMeshes)
+        draw(encoder: encoder, meshes: self.cowMeshes)
 
-        scaleFactor = 0.5
-        
-        let currentX = rotationX
-        let currentY = rotationY
-        
-        rotationX = 100 + currentX
-        rotationY = 10 + currentY
-        translate = [0, -2, -5]
-        updateDynamicBuffer(view: view)
-        encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
-        
-        draw(encoder: encoder, meshes: self.teapotMeshes)
-    
         encoder.endEncoding()
-
+        
         commandBuffer.present(drawable)
         commandBuffer.commit()
-        
-        rotationX = currentX
-        rotationY = currentY
-        translate = [0, 1, -5]
     }
     
     private func encoder(_ encoder: MTLRenderCommandEncoder, callback: (MTLRenderCommandEncoder) -> Void) {
@@ -192,4 +162,3 @@ class ModelIORenderer: NSObject, Renderer {
         }
     }
 }
-

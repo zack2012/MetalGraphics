@@ -53,6 +53,11 @@ class ViewController: UIViewController {
         model.content = ["Use Model IO import Model"]
         model.viewControllerClasses = [ModelIOViewController.self]
         models.append(model)
+        
+        model.header = "Texture"
+        model.content = ["Use Texture to Shade Surface"]
+        model.viewControllerClasses = [TextureViewController.self]
+        models.append(model)
     }
 }
 

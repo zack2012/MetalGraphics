@@ -27,6 +27,11 @@
 		90127EFD212B8A0A00471FE1 /* CubeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFC212B8A0A00471FE1 /* CubeView.swift */; };
 		90127F00212C3C4200471FE1 /* CubeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90127EFF212C3C4200471FE1 /* CubeRenderer.swift */; };
 		90127F02212C3DFC00471FE1 /* CubeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90127F01212C3DFC00471FE1 /* CubeShaders.metal */; };
+		90399BB3217AA119002D103A /* TextureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90399BB2217AA119002D103A /* TextureViewController.swift */; };
+		90399BB5217AA137002D103A /* TextureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90399BB4217AA137002D103A /* TextureRenderer.swift */; };
+		90399BB7217AA70B002D103A /* TextureShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 90399BB6217AA70B002D103A /* TextureShaders.metal */; };
+		90399BB9217B24EA002D103A /* spot.obj in Resources */ = {isa = PBXBuildFile; fileRef = 90399BB8217B24EA002D103A /* spot.obj */; };
+		90399BBB217B24F1002D103A /* spot_texture.png in Resources */ = {isa = PBXBuildFile; fileRef = 90399BBA217B24F1002D103A /* spot_texture.png */; };
 		903E528D2145F430005367BD /* LightingParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903E528C2145F430005367BD /* LightingParameterViewController.swift */; };
 		906A3F9C213F618500034EAA /* TetrahedronShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 906A3F9B213F618500034EAA /* TetrahedronShaders.metal */; };
 		9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9081561B2141FE8800E370D6 /* MetalViewController.swift */; };
@@ -108,6 +113,11 @@
 		90127EFC212B8A0A00471FE1 /* CubeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeView.swift; sourceTree = "<group>"; };
 		90127EFF212C3C4200471FE1 /* CubeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeRenderer.swift; sourceTree = "<group>"; };
 		90127F01212C3DFC00471FE1 /* CubeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = CubeShaders.metal; sourceTree = "<group>"; };
+		90399BB2217AA119002D103A /* TextureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureViewController.swift; sourceTree = "<group>"; };
+		90399BB4217AA137002D103A /* TextureRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextureRenderer.swift; sourceTree = "<group>"; };
+		90399BB6217AA70B002D103A /* TextureShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = TextureShaders.metal; sourceTree = "<group>"; };
+		90399BB8217B24EA002D103A /* spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = spot.obj; sourceTree = "<group>"; };
+		90399BBA217B24F1002D103A /* spot_texture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spot_texture.png; sourceTree = "<group>"; };
 		903E528C2145F430005367BD /* LightingParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightingParameterViewController.swift; sourceTree = "<group>"; };
 		906A3F9B213F618500034EAA /* TetrahedronShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = TetrahedronShaders.metal; sourceTree = "<group>"; };
 		9081561B2141FE8800E370D6 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +265,7 @@
 				9081561A2141FE5B00E370D6 /* Sphere */,
 				909A7A4221440E4C000AA691 /* Lighting */,
 				147B42D221649D4A0096053E /* ModelIO */,
+				90399BB1217AA0A1002D103A /* Texture */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -267,6 +278,18 @@
 				900B4E49212A457500554676 /* HelloTriangleShaders.metal */,
 			);
 			path = HelloWorld;
+			sourceTree = "<group>";
+		};
+		90399BB1217AA0A1002D103A /* Texture */ = {
+			isa = PBXGroup;
+			children = (
+				90399BBA217B24F1002D103A /* spot_texture.png */,
+				90399BB8217B24EA002D103A /* spot.obj */,
+				90399BB2217AA119002D103A /* TextureViewController.swift */,
+				90399BB4217AA137002D103A /* TextureRenderer.swift */,
+				90399BB6217AA70B002D103A /* TextureShaders.metal */,
+			);
+			path = Texture;
 			sourceTree = "<group>";
 		};
 		9081561A2141FE5B00E370D6 /* Sphere */ = {
@@ -431,6 +454,8 @@
 				147B42D62164C22B0096053E /* teapot.obj in Resources */,
 				147B42D82164C2360096053E /* dragon.obj in Resources */,
 				900B4E3521280C2400554676 /* LaunchScreen.storyboard in Resources */,
+				90399BBB217B24F1002D103A /* spot_texture.png in Resources */,
+				90399BB9217B24EA002D103A /* spot.obj in Resources */,
 				900B4E3221280C2400554676 /* Assets.xcassets in Resources */,
 				900B4E3021280C2300554676 /* Main.storyboard in Resources */,
 			);
@@ -470,6 +495,7 @@
 				909A7A2A2143844D000AA691 /* TransitionAnimatorable.swift in Sources */,
 				900B4E46212816D100554676 /* HelloTriangleViewController.swift in Sources */,
 				147B42D421649D7D0096053E /* ModelIOViewController.swift in Sources */,
+				90399BB3217AA119002D103A /* TextureViewController.swift in Sources */,
 				9081561E2141FF2800E370D6 /* SphereViewController.swift in Sources */,
 				909A7A4421440E7E000AA691 /* LightingViewController.swift in Sources */,
 				90E7AF4B214B44B0005E4331 /* LightingReflectParameterViewController.swift in Sources */,
@@ -484,9 +510,11 @@
 				909A7A4821440E93000AA691 /* LightingShaders.metal in Sources */,
 				903E528D2145F430005367BD /* LightingParameterViewController.swift in Sources */,
 				90815624214204CE00E370D6 /* Renderer.swift in Sources */,
+				90399BB5217AA137002D103A /* TextureRenderer.swift in Sources */,
 				90D6D7A721657B2300E72F88 /* ModelIORender.swift in Sources */,
 				9003A0E1213DFA82008A530F /* Common.swift in Sources */,
 				909A7A2721438448000AA691 /* AlertAnimator.swift in Sources */,
+				90399BB7217AA70B002D103A /* TextureShaders.metal in Sources */,
 				9081561C2141FE8800E370D6 /* MetalViewController.swift in Sources */,
 				9003A0DD213CBEA3008A530F /* TetrahedronViewController.swift in Sources */,
 			);

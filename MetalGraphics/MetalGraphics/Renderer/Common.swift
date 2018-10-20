@@ -96,3 +96,29 @@ extension MTLRenderCommandEncoder {
         endEncoding()
     }
 }
+
+func importAssert(name: String,
+                  bufferAllocator: MDLMeshBufferAllocator,
+                  vertexDescriptor: MDLVertexDescriptor? = nil
+    ) -> MDLAsset {
+    let bundle = Bundle.main
+    let url = bundle.url(forResource: name, withExtension: "obj")!
+    return MDLAsset(url: url, vertexDescriptor: vertexDescriptor, bufferAllocator: bufferAllocator)
+}
+
+func loadTexture(device: MTLDevice, imageName: String) throws -> MTLTexture {
+    let textureLoader = MTKTextureLoader(device: device)
+    let textureLoaderOptions: [MTKTextureLoader.Option: Any] = [
+        .origin: MTKTextureLoader.Origin.bottomLeft
+    ]
+    
+    let fileExtension = URL(fileURLWithPath: imageName).pathExtension.isEmpty ? "png" : nil
+    
+    guard let url = Bundle.main.url(forResource: imageName, withExtension: fileExtension) else {
+        fatalError()
+    }
+    
+    let texture = try textureLoader.newTexture(URL: url, options: textureLoaderOptions)
+    
+    return texture
+}
