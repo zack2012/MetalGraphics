@@ -6,7 +6,7 @@
 //  Copyright © 2018 lowe. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import simd
 import MetalKit
 
@@ -107,18 +107,61 @@ func importAssert(name: String,
 }
 
 func loadTexture(device: MTLDevice, imageName: String) throws -> MTLTexture {
-    let textureLoader = MTKTextureLoader(device: device)
-    let textureLoaderOptions: [MTKTextureLoader.Option: Any] = [
-        .origin: MTKTextureLoader.Origin.bottomLeft
-    ]
+//    let textureLoader = MTKTextureLoader(device: device)
+//    let textureLoaderOptions: [MTKTextureLoader.Option: Any] = [
+//        .origin: MTKTextureLoader.Origin.bottomLeft
+//    ]
+//
+//    let fileExtension = URL(fileURLWithPath: imageName).pathExtension.isEmpty ? "png" : nil
+//
+//    guard let url = Bundle.main.url(forResource: imageName, withExtension: fileExtension) else {
+//        fatalError()
+//    }
+//
+//    let texture = try textureLoader.newTexture(URL: url, options: textureLoaderOptions)
     
     let fileExtension = URL(fileURLWithPath: imageName).pathExtension.isEmpty ? "png" : nil
-    
+
     guard let url = Bundle.main.url(forResource: imageName, withExtension: fileExtension) else {
         fatalError()
     }
+
+    let image = UIImage(contentsOfFile: url.path)!
+    let cgImage = image.cgImage!
+    let width = cgImage.width
+    let height = cgImage.height
+    let bytesPerPixel = 4
+    let bitsPerComponent = 8
+    let bytesPerRow = cgImage.bytesPerRow
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
     
-    let texture = try textureLoader.newTexture(URL: url, options: textureLoaderOptions)
+    let rawData = UnsafeMutableRawPointer.allocate(byteCount: width * height * bytesPerPixel, alignment: MemoryLayout<UInt8>.alignment)
+    defer {
+        rawData.deallocate()
+    }
+
+    let bitmapInfo = CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue
+    let context = CGContext(data: rawData,
+                            width: width,
+                            height: height,
+                            bitsPerComponent: bitsPerComponent,
+                            bytesPerRow: bytesPerRow,
+                            space: colorSpace,
+                            bitmapInfo: bitmapInfo)!
+
+    // 调整原点到左下角
+    context.translateBy(x: 0, y: CGFloat(height))
+    context.scaleBy(x: 1, y: -1)
+
+    context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+    let textureDesc = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba8Unorm_srgb, width: width, height: height, mipmapped: false)
+    textureDesc.usage = .shaderRead
+    
+    let texture = device.makeTexture(descriptor: textureDesc)!
+    
+    let region = MTLRegionMake2D(0, 0, width, height)
+    texture.replace(region: region, mipmapLevel: 0, withBytes: rawData, bytesPerRow: bytesPerRow)
     
     return texture
 }

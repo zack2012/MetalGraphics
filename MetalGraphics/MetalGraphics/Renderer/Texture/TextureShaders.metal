@@ -67,7 +67,7 @@ fragment float4 textureFragment(VertexOut inVertex [[stage_in]],
     float rcosValue = max(0.0, dot(h, normal));
     float3 rcosVec = float3(rcosValue);
     
-    constexpr sampler textureSampler;
+    constexpr sampler textureSampler(filter::nearest, address::repeat);
     float3 baseColor = baseColorTexture.sample(textureSampler, inVertex.uv).rgb;
     
     float3 color = ca * la + baseColor * float3(0.8, 0.8, 0.8) * cosVec + cr * lr * pow(rcosVec, p);

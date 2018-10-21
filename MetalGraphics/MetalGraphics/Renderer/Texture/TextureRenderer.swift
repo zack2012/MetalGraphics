@@ -22,6 +22,7 @@ class TextureRenderer: NSObject, Renderer {
     private var renderPipelineState: MTLRenderPipelineState
     private var teapotRenderPipelineState: MTLRenderPipelineState
     private var depthStencilState: MTLDepthStencilState
+    private var sampleState: MTLSamplerState
     
     private var cowMeshes: [MTKMesh]
     private var cowTexture: MTLTexture
@@ -99,6 +100,11 @@ class TextureRenderer: NSObject, Renderer {
 
         cowTexture = try! loadTexture(device: device, imageName: "spot_texture.png")
         
+        let sampleDesc = MTLSamplerDescriptor()
+        sampleDesc.sAddressMode = .repeat
+        sampleDesc.tAddressMode = .repeat
+        self.sampleState = device.makeSamplerState(descriptor: sampleDesc)!
+        
         super.init()
         
         mtkView.delegate = self
@@ -126,7 +132,7 @@ class TextureRenderer: NSObject, Renderer {
         updateDynamicBuffer(view: view)
         encoder.setVertexBuffer(uniformBuffer, offset: 0, index: 2)
         encoder.setFragmentTexture(cowTexture, index: 0)
-        
+//        encoder.setFragmentSamplerState(sampleState, index: 0)
         draw(encoder: encoder, meshes: self.cowMeshes)
 
         encoder.endEncoding()
