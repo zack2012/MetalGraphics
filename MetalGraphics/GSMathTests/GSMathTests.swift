@@ -10,6 +10,32 @@ import XCTest
 @testable import GSMath
 import simd
 
+private extension float4x4 {
+    init(rotationX angle: Float) {
+        self = matrix_identity_float4x4
+        columns.1.y = cos(angle)
+        columns.1.z = sin(angle)
+        columns.2.y = -sin(angle)
+        columns.2.z = cos(angle)
+    }
+    
+    init(rotationY angle: Float) {
+        self = matrix_identity_float4x4
+        columns.0.x = cos(angle)
+        columns.0.z = -sin(angle)
+        columns.2.x = sin(angle)
+        columns.2.z = cos(angle)
+    }
+    
+    init(rotationZ angle: Float) {
+        self = matrix_identity_float4x4
+        columns.0.x = cos(angle)
+        columns.0.y = sin(angle)
+        columns.1.x = -sin(angle)
+        columns.1.y = cos(angle)
+    }
+}
+
 class GSMathTests: XCTestCase {
 
     override func setUp() {
@@ -74,6 +100,23 @@ class GSMathTests: XCTestCase {
                 let _ = f3.normalize
             }
         }
+    }
+    
+    func testRotation() {
+        var radian = 90.radian
+        var m1 = float4x4(rotationX: radian)
+        var m2 = rotation(axis: [1, 0, 0], angle: radian)
+        XCTAssertEqual(m1, m2)
+        
+        radian = 45.radian
+        m1 = float4x4(rotationY: radian)
+        m2 = rotation(axis: [0, 1, 0], angle: radian)
+        XCTAssertEqual(m1, m2)
+
+        radian = 135.radian
+        m1 = float4x4(rotationZ: radian)
+        m2 = rotation(axis: [0, 0, 1], angle: radian)
+        XCTAssertEqual(m1, m2)
     }
     
     func testCross() {
