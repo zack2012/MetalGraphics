@@ -141,10 +141,6 @@ class TextureRenderer: NSObject, Renderer {
         commandBuffer.commit()
     }
     
-    private func encoder(_ encoder: MTLRenderCommandEncoder, callback: (MTLRenderCommandEncoder) -> Void) {
-        callback(encoder)
-    }
-    
     private func setupEncoder(_ encoder: MTLRenderCommandEncoder, pipelineState: MTLRenderPipelineState) {
         encoder.setDepthStencilState(depthStencilState)
         encoder.setCullMode(.back)
